@@ -1,36 +1,87 @@
 import React, { useState } from "react";
 
-const CustomDropdown = ({ options }: { options?: string[] }) => {
+type Compound = {
+  label: string;
+  value: string;
+};
+type Options = string[] | Compound[];
+
+const CustomDropdown = ({
+  options,
+  placeholder,
+  onChange,
+}: {
+  options?: Options;
+  placeholder: string;
+  onChange: (value: string) => void;
+}) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  const [selectedOption, setSelectedOption] = useState<
+    string | Compound | null
+  >(null);
 
   const toggling = () => setIsOpen(!isOpen);
 
-  const onOptionClicked = (value: string) => () => {
-    setSelectedOption(value);
+  const onOptionClicked = (props: Compound | string) => {
+    setSelectedOption(props);
     setIsOpen(false);
-    console.log(selectedOption);
+    const payload = typeof props === "string" ? props : props.label;
+    onChange(payload);
+  };
+
+  const selectedOptionComponent = () => {
+    if (selectedOption) {
+      return typeof selectedOption === "string" ? (
+        selectedOption
+      ) : (
+        <>
+          <span className="w-[24px] h-[24px]">
+            <img
+              className="dropdown-img h-full mx-auto block"
+              src={`/images/${selectedOption.value}.ico`}
+            />
+          </span>
+          {selectedOption.label}
+        </>
+      );
+    }
   };
 
   return (
     <div className="dropdown">
       <div className="dropdown-header" onClick={toggling}>
-        <input type="text" className="dropdown-input" />
-        {selectedOption || "Select an option"}
-        <span className={`dropdown-arrow ${isOpen ? "open" : ""}`}>▼</span>
+        {selectedOption ? selectedOptionComponent() : placeholder}
+        <div className="material-icons text-[20px] ml-auto">
+          {isOpen ? "expand_more" : "expand_less"}
+        </div>
       </div>
       {isOpen && (
         <ul className="dropdown-list">
           {options &&
-            options.map((option) => (
-              <li
-                className="dropdown-list-item"
-                onClick={onOptionClicked(option)}
-                key={Math.random()}
-              >
-                {option}
-              </li>
-            ))}
+            options.map((option) => {
+              return (
+                <li
+                  className="dropdown-list-item"
+                  onClick={() => onOptionClicked(option)}
+                  key={Math.random()}
+                >
+                  {typeof option === "string" ? (
+                    option
+                  ) : (
+                    <>
+                      <span className="w-[24px] h-[24px]">
+                        <img
+                          className="dropdown-img h-full mx-auto block"
+                          src={`/images/${option.value}.ico`}
+                        />
+                      </span>
+
+                      {option.label}
+                    </>
+                  )}
+                </li>
+              );
+            })}
         </ul>
       )}
     </div>

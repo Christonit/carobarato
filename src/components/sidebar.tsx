@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import ClosingFrames from "./closing-frames";
 import ApiService from "../utils/apiService";
 import debounce from "lodash/debounce";
@@ -9,19 +10,24 @@ const Sidebar = ({
 }: {
   toggleSidebar: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [supermarket, setSupermarket] = useState<string>("");
+
   const dispatch = useDispatch();
-  const searchProducts = debounce(
-    async (event: React.ChangeEvent<HTMLInputElement>) => {
-      console.log(event.target);
-      const { data } = await ApiService.getProducts();
-      if (data) {
-        const payload = [data[0], data[1]];
-        dispatch(setComparison({ key: "Cereales", products: payload }));
-        console.log("RES RES", data);
-      }
-    },
-    300
-  );
+  const searchProducts = debounce(async () => {
+    const { data } = await ApiService.getProducts(searchTerm, supermarket);
+    if (data) {
+      const payload = [data[0], data[1]];
+      dispatch(setComparison({ key: "Cereales", products: payload }));
+      console.log("RES RES", data);
+    }
+  }, 300);
+
+  useEffect(() => {
+    if (searchTerm !== "" && supermarket !== "") {
+      searchProducts();
+    }
+  }, [searchTerm, supermarket]);
 
   return (
     <div className="sidebar border-l-[1px] border-solid border-slate-300 h-full">
@@ -34,7 +40,6 @@ const Sidebar = ({
           arrow_forward
         </div>
       </button>
-      <CustomDropdown />
       <div className="w-full flex flex-col items-end justify-start py-0 pr-5 pl-[21px] box-border gap-[16px] mb-[32px]">
         <div className="self-stretch h-[21px] flex flex-row items-end justify-between gap-[20px]">
           <div className="self-stretch flex flex-row items-end justify-start gap-[0px_8px]">
@@ -54,7 +59,7 @@ const Sidebar = ({
         <ClosingFrames nacional="La Sirena" />
       </div>
 
-      <div className="w-[275px] flex flex-col items-start justify-start py-0 px-5 box-border gap-[16px_0px]">
+      <div className="w-full flex flex-col items-start justify-start py-0 px-5 box-border gap-[16px_0px]">
         <b className="relative">Buscar productos</b>
         <div className="self-stretch flex flex-row items-end justify-between py-2 pr-5 pl-[13px] gap-[20px] z-[1] text-dimgray-100 border-[1px] border-solid border-darkgray">
           <div className="relative">Carne de Res</div>
@@ -63,21 +68,22 @@ const Sidebar = ({
             expand_less
           </div>
         </div>
-        <div className="self-stretch flex flex-row items-end justify-start pt-2 px-[11px] pb-[9px] gap-[13px] z-[1] border-[1px] border-solid border-darkgray">
-          <div className="h-4 w-4 relative rounded-[50%] bg-gainsboro z-[2]" />
-          <div className="h-9 w-[235px] relative box-border hidden border-[1px] border-solid border-darkgray" />
-          <input
-            className="w-[62px] [border:none] [outline:none] font-inter text-base bg-[transparent] h-[19px] relative text-dimgray-100 text-left inline-block"
-            placeholder="Nacional"
-            type="text"
-          />
-        </div>
+
+        <CustomDropdown
+          onChange={(val) => setSupermarket(val)}
+          placeholder="Seleccionar supermercado"
+          options={[
+            { label: "La Sirena", value: "sirena" },
+            { label: "El Nacional", value: "nacional" },
+            { label: "Jumbo", value: "jumbo" },
+          ]}
+        />
         <div className=" flex w-full py-[8px] px-[8px] border-[1px] border-solid border-slate-400">
           <div className="material-icons input-icon">search</div>
           <input
             className=""
             placeholder="Buscar producto"
-            onChange={searchProducts}
+            onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
       </div>

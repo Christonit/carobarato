@@ -18,11 +18,12 @@ interface ApiResponse<T> {
   message?: string;
   status?: number; // Include status in the ApiResponse
   // Add other standard response fields
+  [key: string]: any;
 }
 
 // Extend your ApiResponse for error handling
 interface ApiErrorResponse {
-  message: string;
+  message?: string;
   status: number;
   data?: any;
 }
@@ -30,10 +31,16 @@ interface ApiErrorResponse {
 // Define service endpoints
 const ApiService = {
   // Example of GET request with error handling
-  getProducts: async (): Promise<ApiResponse<Product[]> | ApiErrorResponse> => {
+  getProducts: async (
+    searchTerm: string,
+    supermarket: string
+  ): Promise<ApiResponse<Product[]> | ApiErrorResponse> => {
     try {
       const response: AxiosResponse<ApiResponse<Product[]>> =
-        await axiosInstance.get("/products");
+        await axiosInstance.get("/products", {
+          params: { search: searchTerm, supermarket },
+        });
+
       return { data: response.data, status: response.status }; // Include status code in successful response
     } catch (error) {
       if (axios.isAxiosError(error)) {
