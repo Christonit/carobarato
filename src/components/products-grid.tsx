@@ -4,14 +4,42 @@ import { useSelector } from "react-redux";
 import { RootState } from "../store/index";
 import { useEffect } from "react";
 import { Product } from "../types";
+import {
+  BarChart,
+  Bar,
+  Cell,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
+
 const ProductsGrid: NextPage = () => {
   const { comparissons } = useSelector((state: RootState) => state.products);
 
+  const dataProccessor = (data: Product[]) => {
+    const processedData = data.map((item: Product) => {
+      return {
+        name: item.supermercado,
+        Precio: Number(
+          item.prices[0].discounted_price
+            ? item.prices[0].discounted_price
+            : item.prices[0].list_price
+        ),
+      };
+    });
+
+    console.log({ processedData });
+    return processedData;
+  };
   return (
     <div className="mx-auto">
       {comparissons &&
         Object.entries(comparissons).map(
           ([key, value]: [string, Product[]]) => {
+            console.log({ value });
             return (
               <>
                 <div
@@ -30,6 +58,15 @@ const ProductsGrid: NextPage = () => {
                   {value.map((item: Product) => (
                     <ProductCard {...item} />
                   ))}
+
+                  <ResponsiveContainer width="100%" height="100%">
+                    <BarChart data={dataProccessor(value)}>
+                      <Bar dataKey="Precio" fill="#8884d8" />
+                      <YAxis />
+                      <XAxis dataKey={"name"} />
+                      <Tooltip />
+                    </BarChart>
+                  </ResponsiveContainer>
                 </div>
               </>
             );

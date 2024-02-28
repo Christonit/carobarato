@@ -83,13 +83,13 @@ body {
   /* Optional: Adjust based on the height you want for the sidebar */
   /* max-height: 100vh; */
   /* This makes sure your sidebar doesn't extend beyond the viewport height */
-  width: 300px;
+  width: 380px;
   /* Adjust based on your sidebar's width */
   right: 0;
   transition: all 300ms ease-in-out;
 
   &:not(.show) {
-    right: -300px;
+    right: -380px;
   }
 }
 
@@ -99,7 +99,7 @@ body {
 }
 
 .has-sidebar {
-  width: calc(100% - 300px);
+  width: calc(100% - 380px);
 
 }
 
@@ -128,6 +128,9 @@ body {
   top: 36px;
   background-color: white;
   width: 100%;
+  max-height: 360px;
+  overflow-y: scroll;
+  z-index: 9;
 }
 
 .dropdown-list-item:hover {

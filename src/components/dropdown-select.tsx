@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect, ReactElement } from "react";
 
 type Compound = {
   label: string;
@@ -13,12 +13,14 @@ const CustomDropdown = ({
 }: {
   options?: Options;
   placeholder: string;
-  onChange: (value: string) => void;
+  onChange: (value: string | Compound) => void;
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState<
     string | Compound | null
   >(null);
+
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const toggling = () => setIsOpen(!isOpen);
 
@@ -26,7 +28,7 @@ const CustomDropdown = ({
     setSelectedOption(props);
     setIsOpen(false);
     const payload = typeof props === "string" ? props : props.label;
-    onChange(payload);
+    onChange(props);
   };
 
   const selectedOptionComponent = () => {
@@ -47,8 +49,37 @@ const CustomDropdown = ({
     }
   };
 
+  const handleClickOutside = (event: MouseEvent) => {
+    if (
+      dropdownRef.current &&
+      !dropdownRef.current.contains(event.target as Node)
+    ) {
+      setIsOpen(false);
+    }
+  };
+
+  const handleKeyDown = (event: KeyboardEvent) => {
+    if (event.key === "Escape") {
+      setIsOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+      document.addEventListener("keydown", handleKeyDown);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleKeyDown);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isOpen]);
+
   return (
-    <div className="dropdown">
+    <div className="dropdown" ref={dropdownRef}>
       <div className="dropdown-header" onClick={toggling}>
         {selectedOption ? selectedOptionComponent() : placeholder}
         <div className="material-icons text-[20px] ml-auto">
@@ -89,6 +120,3 @@ const CustomDropdown = ({
 };
 
 export default CustomDropdown;
-
-// Usage
-// <CustomDropdown options={['Option 1', 'Option 2', 'Option 3']} />

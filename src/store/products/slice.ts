@@ -22,9 +22,15 @@ export const counterSlice = createSlice({
     ) => {
       state.comparissons[action.payload.key] = action.payload.products;
     },
+    addToComparison: (
+      state,
+      action: PayloadAction<{ key: string; product: Product }>
+    ) => {
+      state.comparissons[action.payload.key].push(action.payload.product);
+    },
   },
 });
 
-export const { setComparison } = counterSlice.actions;
+export const { setComparison, addToComparison } = counterSlice.actions;
 
 export default counterSlice.reducer;
