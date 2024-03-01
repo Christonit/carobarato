@@ -9,6 +9,9 @@ import CustomDropdown from "./dropdown-select";
 import { useSelector } from "react-redux";
 import type { RootState } from "../store/index";
 import { Product } from "../types";
+import { NUEVA_COMPARACION } from "../utils/constants";
+import { SidebarProductCard } from "./SidebarProductCard";
+import { uniqueId } from "lodash";
 const Sidebar = ({
   toggleSidebar,
 }: {
@@ -32,14 +35,19 @@ const Sidebar = ({
   }, 300);
 
   const selectArticle = (article: Product) => {
-    if (Object.keys(comparissons).length === 0) {
+    if (
+      Object.keys(comparissons).length === 0 ||
+      comparissonList!.selected === NUEVA_COMPARACION
+    ) {
       dispatch(
         setComparison({ key: article.product_name, products: [article] })
       );
 
       setComparissonList({
         selected: article.product_name,
-        options: [article.product_name],
+        options: comparissonList?.options
+          ? [...comparissonList.options, article.product_name]
+          : [article.product_name],
       });
     } else {
       dispatch(
@@ -58,11 +66,7 @@ const Sidebar = ({
     }
   }, [searchTerm, supermarket]);
 
-  // useEffect(() => {
-  //   if (Object.keys(comparissons).length > 0) {
-  //     console.log("COMPARISSONS", Object.keys(comparissons).length);
-  //   }
-  // }, [comparissons]);
+  useEffect(() => {}, [comparissons]);
   return (
     <div className="sidebar border-l-[1px] border-solid border-slate-300 h-full">
       <button
@@ -89,7 +93,7 @@ const Sidebar = ({
               });
             }}
             placeholder={comparissonList.selected || "Seleccionar lista"}
-            options={comparissonList?.options}
+            options={[...comparissonList?.options, NUEVA_COMPARACION]}
           />
         )}
 
@@ -106,11 +110,36 @@ const Sidebar = ({
         />
 
         <SearchBox
+          className="mb-[20px]"
           onSearch={setSearchTerm}
           options={articleOptions}
           onSelected={selectArticle}
         />
       </div>
+
+      <hr className="border-t-[1px] border-solid border-slate-200 my-[16px]" />
+
+      {comparissons &&
+        Object.entries(comparissons).map(
+          ([key, value]: [string, Product[]]) => {
+            return (
+              <div className="sidebar-comparison-block" key={uniqueId()}>
+                <div className="flex gap-[12px] mb-[16px]">
+                  <b className="relative">{key}</b>{" "}
+                  <span className="comparison-count">{value.length}</span>
+                </div>
+                <div className="sidebar-comparison-items">
+                  {value.map((product) => (
+                    <SidebarProductCard
+                      key={product.product_name}
+                      {...product}
+                    />
+                  ))}
+                </div>
+              </div>
+            );
+          }
+        )}
     </div>
   );
 };

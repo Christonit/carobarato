@@ -1,11 +1,13 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Product } from "../types";
-
+import cx from "classnames";
 const SearchBox = ({
   options,
   onSearch,
   onSelected,
+  className,
 }: {
+  className?: string;
   options?: Product[];
   onSearch: (value: string) => void;
   onSelected: (value: Product) => void;
@@ -15,6 +17,7 @@ const SearchBox = ({
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const handleClickOutside = (event: MouseEvent) => {
+    console.log("WHATSUp", dropdownRef.current);
     if (
       dropdownRef.current &&
       !dropdownRef.current.contains(event.target as Node)
@@ -52,7 +55,7 @@ const SearchBox = ({
   }, [isOpen]);
 
   return (
-    <div className="dropdown">
+    <div className={cx("dropdown", className)} ref={dropdownRef}>
       <div className="dropdown-header">
         <div className="material-icons input-icon">search</div>
         <input
@@ -68,7 +71,10 @@ const SearchBox = ({
               return (
                 <li
                   className="dropdown-list-item"
-                  onClick={() => onSelected(option)}
+                  onClick={() => {
+                    onSelected(option);
+                    setIsOpen(false);
+                  }}
                   key={Math.random()}
                 >
                   <>

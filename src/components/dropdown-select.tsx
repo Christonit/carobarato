@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, ReactElement } from "react";
-
+import cx from "classnames";
 type Compound = {
   label: string;
   value: string;
@@ -10,9 +10,13 @@ const CustomDropdown = ({
   options,
   placeholder,
   onChange,
+  defaultValue,
+  className,
 }: {
   options?: Options;
-  placeholder: string;
+  defaultValue?: string | Compound;
+  placeholder?: string;
+  className?: string;
   onChange: (value: string | Compound) => void;
 }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -26,9 +30,9 @@ const CustomDropdown = ({
 
   const onOptionClicked = (props: Compound | string) => {
     setSelectedOption(props);
-    setIsOpen(false);
     const payload = typeof props === "string" ? props : props.label;
     onChange(props);
+    setIsOpen(false);
   };
 
   const selectedOptionComponent = () => {
@@ -79,11 +83,11 @@ const CustomDropdown = ({
   }, [isOpen]);
 
   return (
-    <div className="dropdown" ref={dropdownRef}>
+    <div className={cx("dropdown", className)} ref={dropdownRef}>
       <div className="dropdown-header" onClick={toggling}>
         {selectedOption ? selectedOptionComponent() : placeholder}
         <div className="material-icons text-[20px] ml-auto">
-          {isOpen ? "expand_more" : "expand_less"}
+          {!isOpen ? "expand_more" : "expand_less"}
         </div>
       </div>
       {isOpen && (

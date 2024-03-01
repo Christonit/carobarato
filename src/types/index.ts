@@ -26,4 +26,8 @@ type Product = {
   prices: Price[];
 };
 
-export type { Product, Price, BasicInfo };
+type Compound = {
+  label: string;
+  value: string;
+};
+export type { Product, Price, BasicInfo, Compound };

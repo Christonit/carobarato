@@ -2,7 +2,7 @@ import axios, { AxiosResponse, AxiosError } from "axios";
 import { Product } from "../types";
 
 // Set up the base URL for all Axios requests
-const API_BASE_URL = "http://localhost:4001/api";
+const API_BASE_URL = "http://localhost:4000/api";
 
 // Create an instance of Axios
 const axiosInstance = axios.create({
