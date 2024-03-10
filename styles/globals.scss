@@ -5,6 +5,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "mixins";
+
 body {
   @apply leading-[normal] m-0;
 }
@@ -15,6 +17,65 @@ body {
   border-width: 0;
 }
 
+.product-card::before {
+  content: "";
+  height: 4px;
+  width: 4px;
+  background-image: url("/images/corner.svg");
+  position: absolute;
+  background-repeat: no-repeat;
+  background-size: cover;
+  bottom: -6px;
+  left: -2px;
+}
+
+.product-card::after {
+  content: "";
+  height: 4px;
+  width: 4px;
+  background-image: url("/images/corner.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
+  top: -2px;
+  right: -6px;
+  transform: rotate(-180deg);
+}
+
+.has-corners {
+  position: relative;
+}
+
+.alt.has-corners::after,
+.alt.has-corners::before {
+  background-image: url("/images/corner-alt.svg");
+}
+
+.has-corners::before {
+  content: "";
+  height: 4px;
+  width: 4px;
+  background-image: url("/images/corner.svg");
+  position: absolute;
+  background-repeat: no-repeat;
+  background-size: cover;
+  bottom: -6px;
+  left: -2px;
+}
+
+.has-corners::after {
+  content: "";
+  height: 4px;
+  width: 4px;
+  background-image: url("/images/corner.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
+  top: -2px;
+  right: -6px;
+  transform: rotate(-180deg);
+}
+
 .product-card {
   position: relative;
   background-color: #fff;
@@ -23,8 +84,8 @@ body {
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  padding: 20px;
-  gap: 20px;
+  padding: 12px;
+  gap: 12px;
   border-top-width: 2px;
   border-top-style: solid;
   border-top-color: #000;
@@ -37,6 +98,10 @@ body {
   border-left-width: 2px;
   border-left-style: solid;
   border-left-color: #000;
+  @include breakpoint(md) {
+    padding: 20px;
+    gap: 20px;
+  }
 }
 
 .button-primary {
@@ -67,9 +132,7 @@ body {
   line-height: 1;
   height: 40px;
   font-weight: 700;
-
 }
-
 
 .sidebar {
   height: 100%;
@@ -83,29 +146,38 @@ body {
   /* Optional: Adjust based on the height you want for the sidebar */
   /* max-height: 100vh; */
   /* This makes sure your sidebar doesn't extend beyond the viewport height */
-  width: 380px;
+  width: 100%;
   /* Adjust based on your sidebar's width */
   right: 0;
   transition: all 300ms ease-in-out;
 
+  background-color: #fff;
+  z-index: 9;
   &:not(.show) {
-    right: -380px;
+    right: -100%;
+  }
+  @include breakpoint(lg) {
+    width: 380px;
+    &:not(.show) {
+      right: -380px;
+    }
   }
 }
-
 
 .app-body {
   transition: all 300ms ease-in-out;
 }
 
 .has-sidebar {
-  width: calc(100% - 380px);
-
+  @include breakpoint(lg) {
+    width: calc(100% - 380px);
+  }
 }
 
 .dropdown {
   width: 100%;
   position: relative;
+  height: 40px;
 }
 
 .dropdown-header {
@@ -120,12 +192,25 @@ body {
   border-style: solid;
   border-color: #a9a9a9;
   width: 100%;
+  position: relative;
+  height: 100%;
+  max-height: 40px;
+}
+
+.dropdown-header input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding-left: 44px;
+  z-index: -1;
 }
 
 .dropdown-list {
   border: 1px solid #a9a9a9;
   position: absolute;
-  top: 36px;
+  top: 40px;
   background-color: white;
   width: 100%;
   max-height: 360px;
@@ -143,10 +228,11 @@ body {
   display: flex;
   align-items: center;
   gap: 12px;
+  cursor: pointer;
 }
 
 .dropdown-list-item:last-child {
-  border-bottom: unset
+  border-bottom: unset;
 }
 
 .dropdown-img {
@@ -160,14 +246,16 @@ body {
   width: 100%;
 }
 
-.sidebar-comparison-img img {}
+.sidebar-comparison-img img {
+}
 
 .comparison-count {
   background-color: #000;
   color: #fff;
   border-radius: 20px;
   font-size: 14px;
-  width: 20px;
+  min-width: 20px;
+  max-width: 20px;
   height: 20px;
   text-align: center;
   display: block;
@@ -188,9 +276,31 @@ body {
   gap: 12px;
   align-items: center;
   width: 100%;
-
 }
 
 .sidebar-comparison-block {
   padding: 20px 20px;
+}
+
+.product-name {
+  @include breakpoint(md) {
+    width: 260px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    display: block;
+  }
+}
+
+.accordion {
+  @include max-breakpoint(md) {
+    &:not(.collapsed) {
+      height: 100%;
+      padding-bottom: 24px;
+    }
+    &.collapsed {
+      height: 0;
+      overflow: hidden;
+    }
+  }
 }

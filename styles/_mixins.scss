@@ -1,0 +1,38 @@
+@mixin example {
+  font-weight: 700;
+  font-style: italic;
+}
+
+@mixin Rubik {
+  font-family: Rubik;
+}
+
+// Define breakpoints
+$breakpoints: (
+  xs: 0,
+  sm: 640px,
+  md: 768px,
+  lg: 1024px,
+  xl: 1280px,
+  xxl: 1520px,
+);
+
+// Mixin to apply styles based on a minimum width for each breakpoint
+@mixin breakpoint($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    @media (min-width: map-get($breakpoints, $breakpoint)) {
+      @content;
+    }
+  } @else {
+    @error "Unknown breakpoint: #{$breakpoint}. Please use one of: #{map-keys($breakpoints)}.";
+  }
+}
+@mixin max-breakpoint($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    @media (max-width: map-get($breakpoints, $breakpoint)) {
+      @content;
+    }
+  } @else {
+    @error "Unknown breakpoint: #{$breakpoint}. Please use one of: #{map-keys($breakpoints)}.";
+  }
+}

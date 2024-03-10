@@ -3,7 +3,11 @@ import ClosingFrames from "./closing-frames";
 import ApiService from "../utils/apiService";
 import debounce from "lodash/debounce";
 import { useDispatch } from "react-redux";
-import { setComparison, addToComparison } from "../store/products/slice";
+import {
+  setComparison,
+  addToComparison,
+  removeFromComparison,
+} from "../store/products/slice";
 import SearchBox from "../components/search-box";
 import CustomDropdown from "./dropdown-select";
 import { useSelector } from "react-redux";
@@ -132,6 +136,14 @@ const Sidebar = ({
                   {value.map((product) => (
                     <SidebarProductCard
                       key={product.product_name}
+                      removeFromList={(value) => {
+                        dispatch(
+                          removeFromComparison({
+                            list: key,
+                            product_name: value,
+                          })
+                        );
+                      }}
                       {...product}
                     />
                   ))}

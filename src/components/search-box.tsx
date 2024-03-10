@@ -6,7 +6,9 @@ const SearchBox = ({
   onSearch,
   onSelected,
   className,
+  alternative = true,
 }: {
+  alternative?: boolean;
   className?: string;
   options?: Product[];
   onSearch: (value: string) => void;
@@ -77,19 +79,38 @@ const SearchBox = ({
                   }}
                   key={Math.random()}
                 >
-                  <>
-                    <span className="w-[24px] h-[24px]">
-                      <img
-                        className="dropdown-img w-full mx-auto block"
-                        src={option.img_url}
-                      />
-                    </span>
+                  {alternative ? (
+                    <div>
+                      <span className="text-slate-400 text-[14px] leading-tight mb-[4px] inline-block">
+                        {option.product_name}
+                      </span>
 
-                    <b> ${option.prices[0].list_price}</b>
-                    <span className="text-slate-400 text-[14px]">
-                      {option.product_name}
-                    </span>
-                  </>
+                      <div className="flex">
+                        <span className="w-[24px] h-[24px]">
+                          <img
+                            className="dropdown-img w-full mx-auto block"
+                            src={option.img_url}
+                          />
+                        </span>
+
+                        <b> ${option.prices[0].list_price}</b>
+                      </div>
+                    </div>
+                  ) : (
+                    <>
+                      <span className="w-[24px] h-[24px]">
+                        <img
+                          className="dropdown-img w-full mx-auto block"
+                          src={option.img_url}
+                        />
+                      </span>
+
+                      <b> ${option.prices[0].list_price}</b>
+                      <span className="text-slate-400 text-[14px]">
+                        {option.product_name}
+                      </span>
+                    </>
+                  )}
                 </li>
               );
             })}

@@ -28,9 +28,28 @@ export const counterSlice = createSlice({
     ) => {
       state.comparissons[action.payload.key].push(action.payload.product);
     },
+    removeFromComparison: (
+      state,
+      action: PayloadAction<{ list: string; product_name: string }>
+    ) => {
+      console.log(
+        "removing",
+        action.payload,
+        ...state.comparissons[action.payload.list]
+      );
+
+      state.comparissons[action.payload.list] = state.comparissons[
+        action.payload.list
+      ].filter(
+        (product: Product) =>
+          product.product_name !== action.payload.product_name
+      );
+      // delete state.comparissons[action.payload];
+    },
   },
 });
 
-export const { setComparison, addToComparison } = counterSlice.actions;
+export const { setComparison, addToComparison, removeFromComparison } =
+  counterSlice.actions;
 
 export default counterSlice.reducer;

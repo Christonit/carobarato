@@ -38,7 +38,10 @@ const CustomDropdown = ({
   const selectedOptionComponent = () => {
     if (selectedOption) {
       return typeof selectedOption === "string" ? (
-        selectedOption
+        <span className="w-full overflow-hidden text-ellipsis whitespace-nowrap">
+          {" "}
+          {selectedOption}
+        </span>
       ) : (
         <>
           <span className="w-[24px] h-[24px]">
@@ -85,7 +88,14 @@ const CustomDropdown = ({
   return (
     <div className={cx("dropdown", className)} ref={dropdownRef}>
       <div className="dropdown-header" onClick={toggling}>
-        {selectedOption ? selectedOptionComponent() : placeholder}
+        {selectedOption ? (
+          selectedOptionComponent()
+        ) : (
+          <span className="w-full overflow-hidden text-ellipsis whitespace-nowrap">
+            {" "}
+            {placeholder}{" "}
+          </span>
+        )}
         <div className="material-icons text-[20px] ml-auto">
           {!isOpen ? "expand_more" : "expand_less"}
         </div>
