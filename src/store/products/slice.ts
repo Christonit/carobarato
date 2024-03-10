@@ -37,19 +37,16 @@ export const counterSlice = createSlice({
       state,
       action: PayloadAction<{ list: string; product_name: string }>
     ) => {
-      console.log(
-        "removing",
-        action.payload,
-        ...state.comparissons[action.payload.list]
-      );
-
-      state.comparissons[action.payload.list] = state.comparissons[
-        action.payload.list
-      ].filter(
+      const newItems = state.comparissons[action.payload.list].filter(
         (product: Product) =>
           product.product_name !== action.payload.product_name
       );
-      // delete state.comparissons[action.payload];
+
+      if (newItems.length > 0) {
+        state.comparissons[action.payload.list] = newItems;
+      } else {
+        delete state.comparissons[action.payload.list];
+      }
     },
   },
 });
