@@ -1,18 +1,35 @@
 import cx from "classnames";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ProductsGrid from "../src/components/products-grid";
 import Sidebar from "../src/components/sidebar";
 import Row from "../src/components/Row";
 import Container from "../src/components/container";
 import Link from "next/link";
+import useDeviceSize from "../src/hooks";
+import { BREAKPOINTS } from "../src/utils/constants";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleSidebar } from "../src/store/products/slice";
+import { RootState } from "../src/store";
 export default function Desktop<NextPage>() {
-  const [showSidebar, toggleSidebar] = useState(false);
+  // const [showSidebar, toggleSidebar] = useState(false);
+  const dispatch = useDispatch();
+  const { sidebarOpen } = useSelector((state: RootState) => state.products);
 
+  const { windowWidth } = useDeviceSize();
+
+  const sidenavToggle = () => {
+    dispatch(toggleSidebar());
+  };
+  useEffect(() => {
+    if (windowWidth > BREAKPOINTS.xl) {
+      sidenavToggle();
+    }
+  }, [windowWidth]);
   return (
     <div>
       <div
         className={cx("app-body w-full  relative bg-white overflow-hidden ", {
-          "has-sidebar": showSidebar,
+          "has-sidebar": sidebarOpen,
         })}
       >
         <header className="w-full ">
@@ -57,9 +74,15 @@ export default function Desktop<NextPage>() {
               <div className="lg:ml-auto">
                 <button
                   className="button-primary has-corners alt"
-                  onClick={() => toggleSidebar(!showSidebar)}
+                  onClick={() => sidenavToggle()}
                 >
                   Comparaciones
+                  <img
+                    src="/images/view_sidebar.svg"
+                    alt="view_sidebar"
+                    height={20}
+                    width={20}
+                  />
                 </button>
               </div>
             </div>
@@ -72,8 +95,8 @@ export default function Desktop<NextPage>() {
           </Container>
         </Row>
       </div>
-      <div className={cx(["sidebar-container", { show: showSidebar }])}>
-        <Sidebar toggleSidebar={toggleSidebar} />
+      <div className={cx(["sidebar-container", { show: sidebarOpen }])}>
+        <Sidebar />
       </div>
     </div>
   );

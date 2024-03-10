@@ -30,7 +30,7 @@ const PriceComparison = ({ title }) => {
   const [articleOptions, setArticleOptions] = useState([]);
   const products = useSelector((state) => state.products.comparissons[title]);
   const [isOpen, setIsOpen] = useState(true);
-  const { windowWidth } = useDeviceSize(BREAKPOINTS);
+  const { windowWidth } = useDeviceSize();
   const toggling = () => setIsOpen(!isOpen);
 
   const [chartData] = useState(
@@ -56,9 +56,10 @@ const PriceComparison = ({ title }) => {
     }
   }, 300);
 
-  function findCheapestItem() {
+  const findCheapestItem = () => {
     // Sort items based on their Precio value from lowest to highest
 
+    if (chartData.length === 0) return;
     const copy = [...chartData];
     copy.sort((a, b) => a.Precio - b.Precio);
 
@@ -77,9 +78,10 @@ const PriceComparison = ({ title }) => {
       ...cheapest,
       percentageCheaper,
     };
-  }
+  };
 
   const cheapestItem = findCheapestItem();
+
   return (
     <div className="mb-[24px] md:mb-[64px] border-b border-slate-200 md:border-0 ">
       <div className="flex flex-col md:flex-row flex-wrap  items-center justify-between mb-[20px] lg:mb-[32px] gap-[24px]">
@@ -104,15 +106,16 @@ const PriceComparison = ({ title }) => {
             )}
           </div>
 
-          <span className="text-slate-400  text-base lg:text-lg">
-            Precios de fecha{" "}
-            <span className="capitalize">
-              {" "}
-              {format(products[0].prices[0].created_at, "MMMM d, yyyy", {
-                locale: es,
-              })}
+          {products.length && products[0] ? (
+            <span className="text-slate-400  text-base lg:text-lg">
+              Precios de fecha{" "}
+              <span className="capitalize">
+                {format(products[0].prices[0].created_at, "MMMM d, yyyy", {
+                  locale: es,
+                })}
+              </span>
             </span>
-          </span>
+          ) : null}
         </div>
         <div className="hidden md:flex md:flex-row flex-col lg:items-center max-w-[520px]">
           <CustomDropdown

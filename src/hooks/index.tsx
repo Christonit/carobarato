@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-
+import { BREAKPOINTS } from "../utils/constants";
 interface Breakpoints {
   xs: number;
   sm: number;
@@ -14,13 +14,10 @@ interface DeviceInfo {
   windowWidth: number;
 }
 
-const useDeviceSize = (breakpoints: Breakpoints): DeviceInfo => {
+const useDeviceSize = (): DeviceInfo => {
   const [deviceInfo, setDeviceInfo] = useState<DeviceInfo>({
     deviceSize: null,
-    windowWidth:
-      window.innerWidth ||
-      document.documentElement.clientWidth ||
-      document.body.clientWidth,
+    windowWidth: 0,
   });
 
   const checkDeviceSize = () => {
@@ -31,15 +28,15 @@ const useDeviceSize = (breakpoints: Breakpoints): DeviceInfo => {
 
     let newSize: string;
 
-    if (screenWidth < breakpoints.sm) {
+    if (screenWidth < BREAKPOINTS.sm) {
       newSize = "xs";
-    } else if (screenWidth < breakpoints.md) {
+    } else if (screenWidth < BREAKPOINTS.md) {
       newSize = "sm";
-    } else if (screenWidth < breakpoints.lg) {
+    } else if (screenWidth < BREAKPOINTS.lg) {
       newSize = "md";
-    } else if (screenWidth < breakpoints.xl) {
+    } else if (screenWidth < BREAKPOINTS.xl) {
       newSize = "lg";
-    } else if (screenWidth < breakpoints.xxl) {
+    } else if (screenWidth < BREAKPOINTS.xxl) {
       newSize = "xl";
     } else {
       newSize = "xxl";
@@ -51,9 +48,20 @@ const useDeviceSize = (breakpoints: Breakpoints): DeviceInfo => {
     });
   };
 
+  // useEffect(() => {
+  //   setDeviceInfo({
+  //     ...deviceInfo,
+  //     windowWidth:
+  //       window.innerWidth ||
+  //       document.documentElement.clientWidth ||
+  //       document.body.clientWidth,
+  //   });
+  // }, [deviceInfo]);
+
   useEffect(() => {
     checkDeviceSize();
 
+    console.log("dfdsfhsjfh");
     const handleResize = () => {
       checkDeviceSize();
     };
@@ -63,7 +71,7 @@ const useDeviceSize = (breakpoints: Breakpoints): DeviceInfo => {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, [breakpoints]);
+  }, []);
 
   return deviceInfo;
 };

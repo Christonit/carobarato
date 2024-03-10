@@ -9,7 +9,7 @@ export const SidebarProductCard = ({
   img_url,
   removeFromList,
 }: BasicInfo & { removeFromList: (value: string) => void }) => {
-  const { windowWidth } = useDeviceSize(BREAKPOINTS);
+  const { windowWidth } = useDeviceSize();
   return (
     <div className="sidebar-comparison-item">
       <div className="sidebar-comparison-img">

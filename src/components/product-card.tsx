@@ -11,7 +11,7 @@ export default function ProductCard({
   prices,
   img_url,
 }: BasicInfo) {
-  const { windowWidth } = useDeviceSize(BREAKPOINTS);
+  const { windowWidth } = useDeviceSize();
   const superSorter = (value: string) => {
     switch (value) {
       case "la-sirena":

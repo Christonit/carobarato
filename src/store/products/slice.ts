@@ -6,16 +6,21 @@ export interface CounterState {
   comparissons: {
     [key: string]: Product[];
   };
+  sidebarOpen: boolean;
 }
 
 const initialState: CounterState = {
   comparissons: {},
+  sidebarOpen: false,
 };
 
 export const counterSlice = createSlice({
   name: "comparisons",
   initialState,
   reducers: {
+    toggleSidebar: (state) => {
+      state.sidebarOpen = !state.sidebarOpen;
+    },
     setComparison: (
       state,
       action: PayloadAction<{ key: string; products: Product[] }>
@@ -49,7 +54,11 @@ export const counterSlice = createSlice({
   },
 });
 
-export const { setComparison, addToComparison, removeFromComparison } =
-  counterSlice.actions;
+export const {
+  setComparison,
+  addToComparison,
+  removeFromComparison,
+  toggleSidebar,
+} = counterSlice.actions;
 
 export default counterSlice.reducer;

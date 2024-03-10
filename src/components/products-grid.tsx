@@ -1,69 +1,49 @@
 import type { NextPage } from "next";
-import ProductCard from "./product-card";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/index";
-import { useEffect, useState } from "react";
-import { Compound, Product } from "../types";
-import {
-  BarChart,
-  Bar,
-  Cell,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-} from "recharts";
-import SearchBox from "./search-box";
-import debounce from "lodash/debounce";
-import ApiService from "../utils/apiService";
-import CustomDropdown from "./dropdown-select";
+import { Product } from "../types";
+
 import { useDispatch } from "react-redux";
-import { addToComparison } from "../store/products/slice";
+import { toggleSidebar } from "../store/products/slice";
 import { uniqueId } from "lodash";
 import ProductsGridElement from "./products-grid-element";
 
 const ProductsGrid: NextPage = () => {
   const { comparissons } = useSelector((state: RootState) => state.products);
-  const [supermarket, setSupermarket] = useState<Compound>({
-    label: "Jumbo",
-    value: "jumbo",
-  });
-  // const [searchTerm, setSearchTerm] = useState<string>("");
-  const [articleOptions, setArticleOptions] = useState<Product[]>([]);
+
   const dispatch = useDispatch();
 
-  const dataProccessor = (data: Product[]) => {
-    const processedData = data.map((item: Product) => {
-      return {
-        name: item.supermercado,
-        Precio: Number(
-          item.prices[0].discounted_price
-            ? item.prices[0].discounted_price
-            : item.prices[0].list_price
-        ),
-      };
-    });
-    return processedData;
+  const sidenavToggle = () => {
+    dispatch(toggleSidebar());
   };
-
-  const searchProducts = debounce(async (searchTerm: string) => {
-    const { data } = await ApiService.getProducts(
-      searchTerm,
-      supermarket.value
-    );
-    if (data) {
-      setArticleOptions(data);
-    }
-  }, 300);
 
   return (
     <div className="mx-auto">
-      {comparissons &&
+      {Object.keys(comparissons).length ? (
         Object.entries(comparissons).map(([key]: [string, Product[]]) => {
           return <ProductsGridElement key={uniqueId()} title={key} />;
-        })}
+        })
+      ) : (
+        <div className="py-[32px] lg:py-[64px] border-[2px] border-solid border-slate-200 w-full px-[24px]">
+          <img
+            src="/images/shopping_bag.svg"
+            className="w-[92px] lg:w-[180px] mb-[20px] lg:mb-[32px] mx-auto"
+          />
+          <h2 className="text-xl lg:text-3xl font-bold text-center mb-[20px] lg:mb-[32px]">
+            Actualmente no tienes Comparaciones
+          </h2>
+          <p className="text-slate-500 text-center text-base slg:text-xl mb-[20px] lg:mb-[32px]">
+            Dale click al boton de "comparaciones" o de "Crear comparacion" para
+            empezar
+          </p>
+          <button
+            className="button-primary has-corners alt mx-auto"
+            onClick={sidenavToggle}
+          >
+            Crear comparacion
+          </button>
+        </div>
+      )}
     </div>
   );
 };

@@ -7,6 +7,7 @@ import {
   setComparison,
   addToComparison,
   removeFromComparison,
+  toggleSidebar,
 } from "../store/products/slice";
 import SearchBox from "../components/search-box";
 import CustomDropdown from "./dropdown-select";
@@ -16,11 +17,7 @@ import { Product } from "../types";
 import { NUEVA_COMPARACION } from "../utils/constants";
 import { SidebarProductCard } from "./SidebarProductCard";
 import { uniqueId } from "lodash";
-const Sidebar = ({
-  toggleSidebar,
-}: {
-  toggleSidebar: React.Dispatch<React.SetStateAction<boolean>>;
-}) => {
+const Sidebar = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [supermarket, setSupermarket] = useState<string>("");
   const [comparissonList, setComparissonList] = useState<{
@@ -74,7 +71,7 @@ const Sidebar = ({
   return (
     <div className="sidebar border-l-[1px] border-solid border-slate-300 h-full">
       <button
-        onClick={() => toggleSidebar(false)}
+        onClick={() => dispatch(toggleSidebar())}
         className="mb-[32px] w-full flex flex-row items-start justify-between py-0 px-5 box-border gap-[20px] border-b-[1px] border-solid border-slate-300 py-[20px]"
       >
         <b className="relative">Comparador</b>
