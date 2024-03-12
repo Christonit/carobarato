@@ -27,13 +27,13 @@ export default function ProductCard({
 
   console.log({ windowWidth });
   return (
-    <Link className="product-card" href={product_url} target="_blank">
+    <div className="product-card">
       <img className="w-full" alt="" src={img_url} />
-      <div className="md:w-[242px] flex flex-col items-start justify-start gap-[12px]">
+      <div className="xl:w-[242px] flex flex-col items-start justify-start gap-[12px]">
         <div className="relative text-5xl font-black">
           ${prices[0].list_price}
         </div>
-        <div className="relative font-medium">
+        <div className="relative font-medium white-space-nowrap">
           {windowWidth <= BREAKPOINTS.sm
             ? truncateText(product_name, 28)
             : product_name}
@@ -45,6 +45,14 @@ export default function ProductCard({
           {superSorter(supermercado)}
         </div>
       </div>
-    </Link>
+
+      <Link
+        className="button-primary w-full"
+        href={product_url}
+        target="_blank"
+      >
+        Visitar supermercado
+      </Link>
+    </div>
   );
 }

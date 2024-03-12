@@ -6,20 +6,25 @@ const SearchBox = ({
   onSearch,
   onSelected,
   className,
-  alternative = true,
+  alternative = false,
+  loading = false,
+  clearSearch,
 }: {
   alternative?: boolean;
+  loading?: boolean;
   className?: string;
   options?: Product[];
   onSearch: (value: string) => void;
   onSelected: (value: Product) => void;
+  clearSearch?: () => void;
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
+  const [searchTerm, setSearchTerm] = useState<string>("");
   const handleClickOutside = (event: MouseEvent) => {
-    console.log("WHATSUp", dropdownRef.current);
     if (
       dropdownRef.current &&
       !dropdownRef.current.contains(event.target as Node)
@@ -56,15 +61,39 @@ const SearchBox = ({
     };
   }, [isOpen]);
 
+  useEffect(() => {
+    if (searchTerm.length > 0) {
+      onSearch(searchTerm);
+    }
+  }, [searchTerm]);
+
   return (
     <div className={cx("dropdown", className)} ref={dropdownRef}>
       <div className="dropdown-header">
         <div className="material-icons input-icon">search</div>
         <input
           className=""
+          ref={inputRef}
           placeholder="Buscar producto"
-          onChange={(e) => onSearch(e.target.value)}
+          onClick={() => {
+            if (!isOpen) setIsOpen(true);
+          }}
+          onChange={(e) => {
+            setSearchTerm(e.target.value);
+          }}
         />
+        {searchTerm.length > 0 && (
+          <button
+            onClick={() => {
+              inputRef.current!.value = "";
+              setSearchTerm("");
+              onSearch("");
+            }}
+            className="ml-auto material-icons delete-btn text-slate-500 !text-[20px] rounded-full border border-slate-300 h-[24px] min-w-[24px]"
+          >
+            close
+          </button>
+        )}
       </div>
       {isOpen && (
         <ul className="dropdown-list">
@@ -114,6 +143,16 @@ const SearchBox = ({
                 </li>
               );
             })}
+
+          {loading && (
+            <li className="dropdown-list-item">
+              <img
+                src="/images/loading.svg"
+                alt="loading-spinner"
+                className="mx-auto"
+              />
+            </li>
+          )}
         </ul>
       )}
     </div>

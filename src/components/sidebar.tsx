@@ -18,6 +18,7 @@ import { NUEVA_COMPARACION } from "../utils/constants";
 import { SidebarProductCard } from "./SidebarProductCard";
 import { uniqueId } from "lodash";
 const Sidebar = () => {
+  const [isSearchLoading, setIsSearchLoading] = useState<boolean>(false);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [supermarket, setSupermarket] = useState<string>("");
   const [comparissonList, setComparissonList] = useState<{
@@ -31,7 +32,7 @@ const Sidebar = () => {
     const { data } = await ApiService.getProducts(searchTerm, supermarket);
     if (data) {
       setArticleOptions(data);
-      console.log("RES RES", data);
+      setIsSearchLoading(false);
     }
   }, 300);
 
@@ -64,6 +65,9 @@ const Sidebar = () => {
   useEffect(() => {
     if (searchTerm !== "" && supermarket !== "") {
       searchProducts();
+    }
+    if (searchTerm === "") {
+      setArticleOptions([]);
     }
   }, [searchTerm, supermarket]);
 
@@ -112,9 +116,16 @@ const Sidebar = () => {
 
         <SearchBox
           className="mb-[20px]"
-          onSearch={setSearchTerm}
+          onSearch={(value) => {
+            if (value.length > 0 && !isSearchLoading) {
+              setIsSearchLoading(true);
+            }
+
+            setSearchTerm(value);
+          }}
           options={articleOptions}
           onSelected={selectArticle}
+          loading={isSearchLoading}
         />
       </div>
 

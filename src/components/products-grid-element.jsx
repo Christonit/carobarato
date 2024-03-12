@@ -135,6 +135,7 @@ const PriceComparison = ({ title }) => {
             className="ml-[-1px] min-w-[260px] w-full"
             onSearch={searchProducts}
             options={articleOptions}
+            alternative
             onSelected={(value) => {
               dispatch(addToComparison({ key: title, product: value }));
             }}
@@ -144,7 +145,7 @@ const PriceComparison = ({ title }) => {
 
       <div
         className={cx(
-          "grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-[12px] md:gap-[32px] w-full align-center accordion",
+          "grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-[12px] md:gap-[32px] w-full align-center accordion",
           {
             collapsed: !isOpen,
           }
