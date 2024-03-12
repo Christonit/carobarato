@@ -25,18 +25,19 @@ export default function ProductCard({
     }
   };
 
-  console.log({ windowWidth });
   return (
     <div className="product-card">
       <img className="w-full" alt="" src={img_url} />
-      <div className="xl:w-[242px] flex flex-col items-start justify-start gap-[12px]">
+      <div className="xl:w-[242px] flex flex-col items-start justify-start gap-[12px] bg-white relative z-[1]">
         <div className="relative text-5xl font-black">
           ${prices[0].list_price}
         </div>
         <div className="relative font-medium white-space-nowrap">
-          {windowWidth <= BREAKPOINTS.sm
-            ? truncateText(product_name, 28)
-            : product_name}
+          {windowWidth >= BREAKPOINTS.md
+            ? product_name
+            : windowWidth < BREAKPOINTS.md && windowWidth >= BREAKPOINTS.sm
+            ? truncateText(product_name, 32)
+            : truncateText(product_name, 23)}
         </div>
         <div
           className={cx("relative font-medium")}
@@ -47,11 +48,11 @@ export default function ProductCard({
       </div>
 
       <Link
-        className="button-primary w-full"
+        className="button-primary w-full text-center"
         href={product_url}
         target="_blank"
       >
-        Visitar supermercado
+        Visitar {windowWidth >= BREAKPOINTS.md && "supermercado"}
       </Link>
     </div>
   );

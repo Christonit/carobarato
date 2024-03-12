@@ -92,7 +92,7 @@ const PriceComparison = ({ title }) => {
             </h2>
             {windowWidth <= BREAKPOINTS.md && (
               <>
-                <span className="comparison-count mr-[8px]">
+                <span className="comparison-count mx-[8px]">
                   {products.length}
                 </span>
 
