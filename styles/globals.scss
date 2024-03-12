@@ -108,19 +108,34 @@ body {
   }
   transition: all ease-in-out 0.3s;
   height: calc(100% - 40px);
+
+  @include max-breakpoint(sm) {
+    height: 292px;
+  }
   .button-primary {
     opacity: 0;
-    bottom: 40px;
+    top: -40px;
+    pointer-events: none;
     transition: all ease-in-out 0.3s;
   }
 
   &:hover {
     height: 100%;
     border-color: #cca300;
+    @include max-breakpoint(sm) {
+      height: 340px;
+    }
     .button-primary {
       opacity: 1;
-      bottom: 0;
+      pointer-events: initial;
+      top: 0;
     }
+  }
+}
+
+.product-card img {
+  @include max-breakpoint(sm) {
+    max-height: 142px;
   }
 }
 
