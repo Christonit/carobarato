@@ -27,10 +27,33 @@ export default function ProductCard({
 
   return (
     <div className="product-card">
+      {prices[0].discounted_price && (
+        <span className="absolute top-[8px] right-[8px] bg-[#cc2200] text-white px-[8px] py-[4px] font-bold">
+          {(
+            ((prices[0].list_price - prices[0].discounted_price) /
+              prices[0].list_price) *
+            100
+          ).toFixed(0)}{" "}
+          % DESC
+        </span>
+      )}
+
       <img className="w-full" alt="" src={img_url} />
-      <div className="xl:w-[242px] flex flex-col items-start justify-start gap-[12px] bg-white relative z-[1]">
-        <div className="relative text-5xl font-black">
-          ${prices[0].list_price}
+      <div className=" w-full flex flex-col items-start justify-start gap-[12px] bg-white relative z-[1]">
+        <div
+          className={`relative text-5xl font-black ${
+            prices[0].discounted_price && "text-[#cc2200]"
+          }`}
+        >
+          $
+          {prices[0].discounted_price
+            ? prices[0].discounted_price
+            : prices[0].list_price}
+          {prices[0].discounted_price && (
+            <s className="inline-block ml-[8px] font-medium text-slate-600">
+              {prices[0].list_price}
+            </s>
+          )}
         </div>
         <div className="relative font-medium white-space-nowrap">
           {windowWidth >= BREAKPOINTS.md

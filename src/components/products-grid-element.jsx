@@ -24,6 +24,7 @@ import debounce from "lodash/debounce";
 import uniqueId from "lodash/uniqueId";
 import { useDispatch, useSelector } from "react-redux";
 import useDeviceSize from "../hooks";
+import { RootState } from "../store/index";
 const PriceComparison = ({ title }) => {
   const dispatch = useDispatch();
   const [supermarket, setSupermarket] = useState("");
@@ -32,7 +33,7 @@ const PriceComparison = ({ title }) => {
   const [isOpen, setIsOpen] = useState(true);
   const { windowWidth } = useDeviceSize();
   const toggling = () => setIsOpen(!isOpen);
-
+  const { sidebarOpen } = useSelector((state) => state.products);
   const [chartData] = useState(
     products.map((item) => {
       const price = Number(item.prices[0].list_price);
@@ -148,6 +149,8 @@ const PriceComparison = ({ title }) => {
           "grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-[12px] md:gap-[32px] w-full align-center accordion",
           {
             collapsed: !isOpen,
+            "xl:grid-cols-4": !sidebarOpen,
+            "xl:grid-cols-3": sidebarOpen,
           }
         )}
       >

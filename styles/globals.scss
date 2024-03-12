@@ -102,38 +102,55 @@ body {
   border-left-width: 2px;
   border-left-style: solid;
   border-left-color: #000;
+  z-index: 1;
   @include breakpoint(md) {
     padding: 20px;
     gap: 20px;
   }
   transition: all ease-in-out 0.3s;
-  height: calc(100% - 40px);
+  height: 100%;
+  // max-height: 428px;
 
   @include max-breakpoint(sm) {
     height: 292px;
   }
   .button-primary {
     opacity: 0;
-    top: -40px;
+    // top: -40px;
     pointer-events: none;
     transition: all ease-in-out 0.3s;
+    position: absolute;
+    margin: auto;
+    width: calc(100% - 40px);
+    top: unset;
+    bottom: 64px;
+    @include max-breakpoint(sm) {
+      width: calc(100% - 24px);
+    }
   }
 
   &:hover {
-    height: 100%;
+    height: calc(100% + 64px);
     border-color: #cca300;
+    max-height: 468px;
+    z-index: 2;
     @include max-breakpoint(sm) {
-      height: 340px;
+      height: 346px;
     }
     .button-primary {
       opacity: 1;
       pointer-events: initial;
-      top: 0;
+      bottom: 32px;
+
+      @include max-breakpoint(sm) {
+        bottom: 24px;
+      }
     }
   }
 }
 
 .product-card img {
+  // max-height: 242px;
   @include max-breakpoint(sm) {
     max-height: 142px;
   }

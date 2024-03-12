@@ -9,8 +9,8 @@ type BasicInfo = {
 type Price = {
   price_id: string;
   product_id: string;
-  list_price: string; // Or number if you handle it as a numeric value
-  discounted_price: string | null; // Or number if you handle it as a numeric value
+  list_price: number; // Or number if you handle it as a numeric value
+  discounted_price: number | null; // Or number if you handle it as a numeric value
   created_at: string; // Or Date if you plan to convert string to Date object
 };
 
