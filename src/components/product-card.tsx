@@ -27,7 +27,7 @@ export default function ProductCard({
 
   return (
     <div className="product-card">
-      {prices[0].discounted_price && (
+      {prices[0].discounted_price && prices[0].discounted_price > 0 && (
         <span className="absolute top-[8px] right-[8px] bg-[#cc2200] text-white px-[8px] py-[4px] font-bold">
           {(
             ((prices[0].list_price - prices[0].discounted_price) /
@@ -42,14 +42,16 @@ export default function ProductCard({
       <div className=" w-full flex flex-col items-start justify-start gap-[12px] bg-white relative z-[1]">
         <div
           className={`relative text-5xl font-black ${
-            prices[0].discounted_price && "text-[#cc2200]"
+            prices[0].discounted_price &&
+            prices[0].discounted_price > 1 &&
+            "text-[#cc2200]"
           }`}
         >
           $
-          {prices[0].discounted_price
+          {prices[0].discounted_price && prices[0].discounted_price > 1
             ? prices[0].discounted_price
             : prices[0].list_price}
-          {prices[0].discounted_price && (
+          {prices[0].discounted_price && prices[0].discounted_price > 1 && (
             <s className="inline-block ml-[8px] font-medium text-slate-600">
               {prices[0].list_price}
             </s>

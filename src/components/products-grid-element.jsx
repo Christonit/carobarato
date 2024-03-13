@@ -91,20 +91,17 @@ const PriceComparison = ({ title }) => {
             <h2 className=" font-bold text-lg lg:text-2xl leading-none">
               {title}
             </h2>
-            {windowWidth <= BREAKPOINTS.md && (
-              <>
-                <span className="comparison-count mx-[8px]">
-                  {products.length}
-                </span>
 
-                <button
-                  className="material-icons text-[20px] ml-auto"
-                  onClick={toggling}
-                >
-                  {!isOpen ? "expand_more" : "expand_less"}
-                </button>
-              </>
-            )}
+            <span className="comparison-count mx-[8px] lg:hidden">
+              {products.length}
+            </span>
+
+            <button
+              className="material-icons text-[20px] ml-auto lg:hidden"
+              onClick={toggling}
+            >
+              {!isOpen ? "expand_more" : "expand_less"}
+            </button>
           </div>
 
           {products.length && products[0] ? (
@@ -146,11 +143,13 @@ const PriceComparison = ({ title }) => {
 
       <div
         className={cx(
-          "grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-[12px] md:gap-[32px] w-full align-center accordion",
+          "grid grid-cols-2   2xl:grid-cols-4  gap-[12px] md:gap-[32px] w-full align-center accordion",
           {
             collapsed: !isOpen,
             "xl:grid-cols-4": !sidebarOpen,
             "xl:grid-cols-3": sidebarOpen,
+            "lg:grid-cols-3": !sidebarOpen,
+            "lg:grid-cols-2": sidebarOpen,
           }
         )}
       >
