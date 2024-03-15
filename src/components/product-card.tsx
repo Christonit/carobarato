@@ -31,9 +31,10 @@ export default function ProductCard({
         (prices[0].discounted_price as number) > 0 && (
           <span className='absolute top-[8px] right-[8px] bg-[#cc2200] text-white px-[8px] py-[4px] font-bold'>
             {(
-              ((((prices[0].list_price as number) -
+              (((prices[0].list_price as number) -
                 (prices[0].discounted_price as number)) /
-                prices[0].list_price) as number) * 100
+                Number(prices[0].list_price)) *
+              100
             ).toFixed(0)}{' '}
             % DESC
           </span>

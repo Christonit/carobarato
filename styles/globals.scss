@@ -1,13 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Material+Icons:wght@400&display=swap&style=outlined');
 
+/* stylelint-disable-at-rule-no-unknown */
 @tailwind base;
+/* stylelint-disable-at-rule-no-unknown */
 @tailwind components;
+/* stylelint-disable-at-rule-no-unknown */
 @tailwind utilities;
 
 @import 'mixins';
 
 body {
+  /* stylelint-disable-at-rule-no-unknown */
   @apply leading-[normal] m-0;
 }
 
@@ -288,18 +292,11 @@ body {
   border-bottom: unset;
 }
 
-.dropdown-img {
-  /* height: 24px; */
-}
-
 .sidebar-comparison-items {
   display: flex;
   flex-direction: column;
   gap: 12px;
   width: 100%;
-}
-
-.sidebar-comparison-img img {
 }
 
 .comparison-count {
@@ -392,9 +389,6 @@ header.is-home {
   svg {
     width: 100%;
   }
-}
-
-.icon path {
 }
 
 .product-card-img {
