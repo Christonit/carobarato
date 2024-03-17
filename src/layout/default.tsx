@@ -25,6 +25,8 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           property='og:image'
           content='/images/carobarato-og-thumbnail.png'
         />
+
+        
       </Head>
       <div
         className={cx('app-body w-full  relative bg-white overflow-hidden ', {
@@ -73,6 +75,8 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           </Row>
         </footer>
       </div>
+
+      
     </>
   );
 };
