@@ -140,7 +140,7 @@ const [recommended_products, set_recommended_products] = useState<any>([]);
           <div className='flex  flex-col items-center mx-auto  gap-[20px] lg:gap-0 max-w-[900px]'>
             <div className='w-full  mb-[0] lg:mb-[32px]'>
               <h1 className='mt-[64px] lg:mt-0 text-[28px] lg:text-3xl xl:text-[46px] font-black text-center font-inter mb-[20px] lg:mb-[32px]'>
-                ¡Encuentra y compara precios de los productos que necesitas!
+                ¡Encuentra y compara precios de tus productos básicos favoritos!
               </h1>
 
               <p className='text-lg lg:text-[24px] text-slate-900 leading-relaxed font-medium text-center xl:px-[32px]'>
