@@ -214,13 +214,13 @@ export default function Desktop<NextPage>() {
                 Encuentra y compara el precio del articulo que buscas
               </h1>
 
-              <p className='text-lg lg:text-[24px] text-slate-900 leading-relaxed font-medium text-center mb-[20px] lg:mb-[36px] xl:px-[32px]'>
+              <p className='text-lg lg:text-[24px] text-slate-900 leading-relaxed font-medium text-center xl:px-[32px]'>
                 ¿Cuanto cuesta la libra de carne? ¿Como economizar en tu lista
                 del compras? ¿Cual supermercado tiene la avena mas barata?
               </p>
-              <p className='text-lg lg:text-[24px] text-slate-900 leading-relaxed text-center font-medium '>
+              {/* <p className='text-lg lg:text-[24px] text-slate-900 leading-relaxed text-center font-medium '>
                 Todas estas preguntas las respondes con <u>Carobarato</u>.
-              </p>
+              </p> */}
 
               <Link
                 className='button-primary has-corners gold max-w-[220px] red mx-auto mt-[24px] lg:mt-[32px]'
