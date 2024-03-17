@@ -219,12 +219,12 @@ export default function Desktop<NextPage>() {
 
         <meta
           name='description'
-          content='Encuentra y compara precios de los productos que necesitas. Ingresa el producto que buscas, revisa y mide los precios uno al lado del otro & descubre dónde está el ahorro.'
+          content='Ingresa el producto que buscas, revisa y mide los precios uno al lado del otro & descubre dónde está el ahorro.'
         />
 
         <meta
           property='og:description'
-          content='Encuentra y compara precios de los productos que necesitas. Ingresa el producto que buscas, revisa y mide los precios uno al lado del otro & descubre dónde está el ahorro.'
+          content='Ingresa el producto que buscas, revisa y mide los precios uno al lado del otro & descubre dónde está el ahorro.'
         />
       </Head>
       <Row className='bg-gold hero-section !pb-[0]'>
