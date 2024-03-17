@@ -3,11 +3,7 @@ import ProductCard from './product-card';
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
 import cx from 'classnames';
-import {
-  removeComparison,
-  showAddToComparisson,
-} from '../store/products/slice'; // Import your specific action from redux
-import { SUPERMERCADOS_OBJ, COLORS, BREAKPOINTS } from '../utils/constants';
+import { SUPERMERCADOS_OBJ, COLORS,  } from '../utils/constants';
 import {
   BarChart,
   Bar,
@@ -18,16 +14,10 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 import uniqueId from 'lodash/uniqueId';
-import { useDispatch, useSelector } from 'react-redux';
-import useDeviceSize from '../hooks';
 
-const PriceComparison = ({ title }) => {
-  const dispatch = useDispatch();
-  const products = useSelector(state => state.products.comparissons[title]);
+const PriceComparison = ({ title, products, showCount = false }) => {
   const [isOpen, setIsOpen] = useState(true);
-  const { windowWidth } = useDeviceSize();
   const toggling = () => setIsOpen(!isOpen);
-  const { sidebarOpen } = useSelector(state => state.products);
   const [chartData] = useState(
     products.map(item => {
       const price = Number(item.prices[0].list_price);
@@ -74,26 +64,12 @@ const PriceComparison = ({ title }) => {
           <div className='flex w-full md:w-auto items-start lg:items-center'>
             <h2 className='font-bold text-lg lg:text-2xl leading-none max-w-[75%] lg:max-w-full'>
               {title}
-              <span className='comparison-count ml-[8px] mr-[12px] lg:hidden'>
+              {showCount && <span className='comparison-count ml-[8px] mr-[12px] lg:hidden'>
                 {products.length}
-              </span>
+              </span>}
             </h2>
-
             <button
               className='material-icons text-[20px] ml-auto lg:hidden'
-              onClick={() => dispatch(removeComparison(title))}
-            >
-              delete_outline
-            </button>
-
-            <button
-              className='material-icons text-[20px] ml-[12px] lg:hidden'
-              onClick={() => dispatch(showAddToComparisson(title))}
-            >
-              add_circle_outline
-            </button>
-            <button
-              className='material-icons text-[20px] ml-[8px] lg:hidden'
               onClick={toggling}
             >
               {!isOpen ? 'expand_more' : 'expand_less'}
@@ -111,35 +87,14 @@ const PriceComparison = ({ title }) => {
             </span>
           ) : null}
         </div>
-        {windowWidth > BREAKPOINTS.lg && (
-          <div className='flex md:flex-row flex-col lg:items-center  button-primary has-corners !bg-transparent !py-0  '>
-            <button
-              className='material-icons text-[24px] !px-[8px] !h-full '
-              onClick={() => dispatch(showAddToComparisson(title))}
-            >
-              add_circle_outline
-            </button>
 
-            <span className='h-[32px] w-[1px] bg-slate-900' />
-            <button
-              className='material-icons text-[24px] !px-[8px] !h-full'
-              onClick={() => dispatch(removeComparison(title))}
-            >
-              delete_outline
-            </button>
-          </div>
-        )}
       </div>
 
       <div
         className={cx(
-          'grid grid-cols-2   2xl:grid-cols-4  gap-[12px] md:gap-[32px] w-full align-center accordion',
+          'grid grid-cols-2   2xl:grid-cols-4  xl:grid-cols-4 lg:grid-cols-3 gap-[12px] md:gap-[32px] w-full align-center accordion',
           {
             collapsed: !isOpen,
-            'xl:grid-cols-4': !sidebarOpen,
-            'xl:grid-cols-3': sidebarOpen,
-            'lg:grid-cols-3': !sidebarOpen,
-            'lg:grid-cols-2': sidebarOpen,
           }
         )}
       >

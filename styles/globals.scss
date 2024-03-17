@@ -367,7 +367,7 @@ body {
 
 .hero-section {
   position: relative;
-  margin-top: -60px;
+  margin-top: -80px;
   &::before {
     content: '';
     background-image: url('/images/background.webp');
@@ -377,6 +377,7 @@ body {
     height: 100%;
     width: 100%;
     background-size: cover;
+    background-position: center;
     opacity: 0.1;
     z-index: 1;
   }
@@ -386,13 +387,24 @@ body {
     position: absolute;
     bottom: 0;
     left: 0;
-    height: 200px;
+    height: 300px;
     width: 100%;
     opacity: 1;
     z-index: 1;
   }
 }
 
+.cutout{
+  position: absolute;
+  bottom: 300px;
+  height: 300px;
+  width: 100%;
+  background-image: url('/images/pattern.svg');
+  z-index: 1;
+  background-size: 140px;
+  background-repeat: repeat-x;
+  background-position: bottom;
+}
 header.is-home {
   position: relative;
   z-index: 9;
@@ -403,10 +415,14 @@ header.is-home {
   background-color: #fff;
   border: 8px solid rgb(226, 232, 240);
   border-radius: 100%;
-  height: 144px;
-  width: 144px;
+  height: 80px;
+  width: 80px;
   display: flex;
   align-items: center;
+  @include breakpoint(lg){
+    height: 144px;
+    width: 144px;
+  }
   svg {
     width: 100%;
   }
