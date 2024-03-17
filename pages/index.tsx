@@ -211,12 +211,12 @@ export default function Desktop<NextPage>() {
           <div className='flex  flex-col items-center mx-auto  gap-[20px] lg:gap-0 max-w-[900px]'>
             <div className='w-full  mb-[0] lg:mb-[32px]'>
               <h1 className='mt-[64px] lg:mt-0 text-xl lg:text-3xl xl:text-[46px] font-black text-center font-inter mb-[20px] lg:mb-[32px]'>
-                Encuentra y compara el precio del articulo que buscas
+                ¡Encuentra y compara precios de los productos que necesitas!
               </h1>
 
               <p className='text-lg lg:text-[24px] text-slate-900 leading-relaxed font-medium text-center xl:px-[32px]'>
-                ¿Cuanto cuesta la libra de carne? ¿Como economizar en tu lista
-                del compras? ¿Cual supermercado tiene la avena mas barata?
+              ¿Cuánto cuesta un litro de ron? ¿Cómo ahorrar en tu lista de compras?
+              ¿Cuál supermercado tiene la avena más económica?
               </p>
               {/* <p className='text-lg lg:text-[24px] text-slate-900 leading-relaxed text-center font-medium '>
                 Todas estas preguntas las respondes con <u>Carobarato</u>.

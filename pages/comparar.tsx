@@ -4,7 +4,6 @@ import ProductsGrid from '../src/components/products-grid';
 import Sidebar from '../src/components/sidebar';
 import Row from '../src/components/Row';
 import Container from '../src/components/container';
-import Link from 'next/link';
 import useDeviceSize from '../src/hooks';
 import { BREAKPOINTS } from '../src/utils/constants';
 import { useDispatch, useSelector } from 'react-redux';
@@ -40,7 +39,7 @@ export default function Desktop<NextPage>() {
                 </h1>
 
                 <p className='text-lglg:text-[24px] text-slate-400 font-regular '>
-                  Encuentra el precio mas barato del articulo que buscas en tus
+                  Encuentra el precio articulo que buscas en tus
                   supermercados de preferencia.
                 </p>
               </div>
