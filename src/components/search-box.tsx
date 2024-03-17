@@ -1,6 +1,6 @@
-import React, { useEffect, useState, useRef } from "react";
-import { Product } from "../types";
-import cx from "classnames";
+import React, { useEffect, useState, useRef } from 'react';
+import { Product } from '../types';
+import cx from 'classnames';
 const SearchBox = ({
   options,
   onSearch,
@@ -23,7 +23,7 @@ const SearchBox = ({
   const dropdownRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [searchTerm, setSearchTerm] = useState<string>('');
   const handleClickOutside = (event: MouseEvent) => {
     if (
       dropdownRef.current &&
@@ -34,7 +34,7 @@ const SearchBox = ({
   };
 
   const handleKeyDown = (event: KeyboardEvent) => {
-    if (event.key === "Escape") {
+    if (event.key === 'Escape') {
       setIsOpen(false);
     }
   };
@@ -49,15 +49,15 @@ const SearchBox = ({
 
   useEffect(() => {
     if (isOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
-      document.addEventListener("keydown", handleKeyDown);
+      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener('keydown', handleKeyDown);
     } else {
-      document.removeEventListener("mousedown", handleClickOutside);
-      document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleKeyDown);
     }
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-      document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleKeyDown);
     };
   }, [isOpen]);
 
@@ -68,40 +68,40 @@ const SearchBox = ({
   }, [searchTerm]);
 
   return (
-    <div className={cx("dropdown", className)} ref={dropdownRef}>
-      <div className="dropdown-header">
-        <div className="material-icons input-icon">search</div>
+    <div className={cx('dropdown', className)} ref={dropdownRef}>
+      <div className='dropdown-header'>
+        <div className='material-icons input-icon'>search</div>
         <input
-          className=""
+          className=''
           ref={inputRef}
-          placeholder="Buscar producto"
+          placeholder='Buscar producto'
           onClick={() => {
             if (!isOpen) setIsOpen(true);
           }}
-          onChange={(e) => {
+          onChange={e => {
             setSearchTerm(e.target.value);
           }}
         />
         {searchTerm.length > 0 && (
           <button
             onClick={() => {
-              inputRef.current!.value = "";
-              setSearchTerm("");
-              onSearch("");
+              inputRef.current!.value = '';
+              setSearchTerm('');
+              onSearch('');
             }}
-            className="ml-auto material-icons delete-btn text-slate-500 !text-[20px] rounded-full border border-slate-300 h-[24px] min-w-[24px]"
+            className='ml-auto material-icons delete-btn text-slate-500 !text-[20px] rounded-full border border-slate-300 h-[24px] min-w-[24px]'
           >
             close
           </button>
         )}
       </div>
       {isOpen && (
-        <ul className="dropdown-list">
+        <ul className='dropdown-list'>
           {options &&
-            options.map((option) => {
+            options.map(option => {
               return (
                 <li
-                  className="dropdown-list-item"
+                  className='dropdown-list-item'
                   onClick={() => {
                     onSelected(option);
                     setIsOpen(false);
@@ -110,32 +110,32 @@ const SearchBox = ({
                 >
                   {alternative ? (
                     <div>
-                      <span className="text-slate-400 text-[14px] leading-tight mb-[4px] inline-block">
+                      <span className='text-slate-400 text-[14px] leading-tight mb-[4px] inline-block'>
                         {option.product_name}
                       </span>
 
-                      <div className="flex">
-                        <span className="w-[24px] h-[24px]">
+                      <div className='flex'>
+                        <span className='w-[24px] h-[24px]'>
                           <img
-                            className="dropdown-img w-full mx-auto block"
+                            className='dropdown-img w-full mx-auto block'
                             src={option.img_url}
                           />
                         </span>
 
-                        <b> ${option.prices[0].list_price}</b>
+                        <b> ${option.prices && option.prices[0].list_price}</b>
                       </div>
                     </div>
                   ) : (
                     <>
-                      <span className="w-[24px] h-[24px]">
+                      <span className='w-[24px] h-[24px]'>
                         <img
-                          className="dropdown-img w-full mx-auto block"
+                          className='dropdown-img w-full mx-auto block'
                           src={option.img_url}
                         />
                       </span>
 
-                      <b> ${option.prices[0].list_price}</b>
-                      <span className="text-slate-400 text-[14px]">
+                      <b> ${option.prices && option.prices[0].list_price}</b>
+                      <span className='text-slate-400 text-[14px]'>
                         {option.product_name}
                       </span>
                     </>
@@ -145,11 +145,11 @@ const SearchBox = ({
             })}
 
           {loading && (
-            <li className="dropdown-list-item">
+            <li className='dropdown-list-item'>
               <img
-                src="/images/loading.svg"
-                alt="loading-spinner"
-                className="mx-auto"
+                src='/images/loading.svg'
+                alt='loading-spinner'
+                className='mx-auto'
               />
             </li>
           )}

@@ -1,24 +1,26 @@
-import { createSlice } from "@reduxjs/toolkit";
-import type { PayloadAction } from "@reduxjs/toolkit";
-import { Product, Price } from "../../types";
+import { createSlice } from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
+import { Product, Price } from '../../types';
 
 export interface CounterState {
   comparissons: {
     [key: string]: Product[];
   };
   sidebarOpen: boolean;
+  addToComparisson?: string | null;
 }
 
 const initialState: CounterState = {
   comparissons: {},
   sidebarOpen: false,
+  addToComparisson: null,
 };
 
 export const counterSlice = createSlice({
-  name: "comparisons",
+  name: 'comparisons',
   initialState,
   reducers: {
-    toggleSidebar: (state) => {
+    toggleSidebar: state => {
       state.sidebarOpen = !state.sidebarOpen;
     },
     setComparison: (
@@ -48,6 +50,13 @@ export const counterSlice = createSlice({
         delete state.comparissons[action.payload.list];
       }
     },
+    removeComparison: (state, action: PayloadAction<string>) => {
+      delete state.comparissons[action.payload];
+    },
+
+    showAddToComparisson: (state, action: PayloadAction<string | null>) => {
+      state.addToComparisson = action.payload;
+    },
   },
 });
 
@@ -56,6 +65,8 @@ export const {
   addToComparison,
   removeFromComparison,
   toggleSidebar,
+  removeComparison,
+  showAddToComparisson,
 } = counterSlice.actions;
 
 export default counterSlice.reducer;

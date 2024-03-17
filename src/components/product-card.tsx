@@ -4,6 +4,7 @@ import { SUPERMERCADOS, COLORS, BREAKPOINTS } from '../utils/constants';
 import cx from 'classnames';
 import { truncateText } from '../utils/general';
 import useDeviceSize from '../hooks';
+import { useRef } from 'react';
 export default function ProductCard({
   supermercado,
   product_name,
@@ -24,9 +25,16 @@ export default function ProductCard({
         return SUPERMERCADOS[0];
     }
   };
+  const productCard = useRef<HTMLDivElement>(null);
+
+  const classToggler = () => {
+    if (productCard.current && windowWidth <= BREAKPOINTS.md) {
+      productCard.current.classList.toggle('active');
+    }
+  };
 
   return (
-    <div className='product-card'>
+    <div className='product-card' onClick={classToggler} ref={productCard}>
       {prices[0].discounted_price &&
         (prices[0].discounted_price as number) > 0 && (
           <span className='absolute top-[8px] right-[8px] bg-[#cc2200] text-white px-[8px] py-[4px] font-bold'>
@@ -68,7 +76,7 @@ export default function ProductCard({
             ? product_name
             : windowWidth < BREAKPOINTS.md && windowWidth >= BREAKPOINTS.sm
             ? truncateText(product_name, 32)
-            : truncateText(product_name, 23)}
+            : truncateText(product_name, product_name.length > 17 ? 19 : 24)}
         </div>
         <div
           className={cx('relative font-medium')}

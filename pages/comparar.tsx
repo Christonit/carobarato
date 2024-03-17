@@ -10,10 +10,13 @@ import { BREAKPOINTS } from '../src/utils/constants';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleSidebar } from '../src/store/products/slice';
 import { RootState } from '../src/store';
+import AddToComparisonModal from '../src/components/add-to-comparison-modal';
 export default function Desktop<NextPage>() {
   // const [showSidebar, toggleSidebar] = useState(false);
   const dispatch = useDispatch();
-  const { sidebarOpen } = useSelector((state: RootState) => state.products);
+  const { sidebarOpen, addToComparisson } = useSelector(
+    (state: RootState) => state.products
+  );
 
   const { windowWidth } = useDeviceSize();
 
@@ -69,6 +72,8 @@ export default function Desktop<NextPage>() {
       <div className={cx(['sidebar-container', { show: sidebarOpen }])}>
         <Sidebar />
       </div>
+
+      {addToComparisson && <AddToComparisonModal />}
     </>
   );
 }

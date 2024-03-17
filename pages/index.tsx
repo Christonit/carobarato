@@ -14,11 +14,12 @@ import { RootState } from '../src/store';
 import FindIcon from '../src/components/icons/find';
 import CompareIcon from '../src/components/icons/compare';
 import ShopIcon from '../src/components/icons/shop';
-import { Product } from '../src/types';
+
+import Link from 'next/link';
+
 export default function Desktop<NextPage>() {
   // const [showSidebar, toggleSidebar] = useState(false);
   const dispatch = useDispatch();
-  const { sidebarOpen } = useSelector((state: RootState) => state.products);
 
   const { windowWidth } = useDeviceSize();
 
@@ -207,29 +208,48 @@ export default function Desktop<NextPage>() {
     <>
       <Row className='bg-gold hero-section !pb-[0]'>
         <Container className='relative z-[2]'>
-          <div className='flex lg:flex-row flex-col items-center justify-between gap-[20px] lg:gap-0'>
-            <div className='w-full lg:max-w-[50%] mb-[0] lg:mb-[64px]'>
-              <h1 className='mt-[64px] lg:mt-0 text-xl lg:text-3xl xl:text-[46px] font-black font-inter mb-[20px] lg:mb-[32px]'>
-                Supermercados, frente a frente. Compara para ahorrar.
+          <div className='flex  flex-col items-center mx-auto  gap-[20px] lg:gap-0 max-w-[900px]'>
+            <div className='w-full  mb-[0] lg:mb-[32px]'>
+              <h1 className='mt-[64px] lg:mt-0 text-xl lg:text-3xl xl:text-[46px] font-black text-center font-inter mb-[20px] lg:mb-[32px]'>
+                Encuentra y compara el precio del articulo que buscas
               </h1>
 
-              <p className='text-lg lg:text-[24px] text-slate-700 leading-relaxed font-regular mb-[20px] lg:mb-[36px]'>
-                <u>
-                  ¿Cuanto cuesta la libra de carne? ¿Como economizar en tu lista
-                  del compras? ¿Cual supermercado tiene la avena mas barata?
-                </u>
+              <p className='text-lg lg:text-[24px] text-slate-900 leading-relaxed font-medium text-center mb-[20px] lg:mb-[36px] xl:px-[32px]'>
+                ¿Cuanto cuesta la libra de carne? ¿Como economizar en tu lista
+                del compras? ¿Cual supermercado tiene la avena mas barata?
               </p>
-              <p className='text-lg lg:text-[24px] text-slate-700 leading-relaxed font-regular '>
-                Todas estas preguntas las respondes con Carobarato.
+              <p className='text-lg lg:text-[24px] text-slate-900 leading-relaxed text-center font-medium '>
+                Todas estas preguntas las respondes con <u>Carobarato</u>.
               </p>
+
+              <Link
+                className='button-primary has-corners gold max-w-[220px] red mx-auto mt-[24px] lg:mt-[32px]'
+                href='/comparar'
+              >
+                Comparar
+              </Link>
             </div>
 
-            <div className='lg:ml-auto'>
-              <img
-                className='max-w-[580px] w-full'
-                src='/images/foods.webp'
-                alt=''
-              />
+            <div className='has-corners alt '>
+              {windowWidth > BREAKPOINTS.lg ? (
+                <video
+                  className=' w-full '
+                  src='/images/how-to-use-desktop.mp4'
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                />
+              ) : (
+                <video
+                  className=' w-full '
+                  src='/images/how-to-use-mobile.mp4'
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                />
+              )}
             </div>
           </div>
         </Container>
