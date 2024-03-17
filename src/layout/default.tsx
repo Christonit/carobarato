@@ -14,6 +14,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <Head>
+        <link rel='icon' href='/favicon.ico' />
         <meta property='og:site_name' content='Carobarato' />
         <meta property='twitter:site' content='Carobarato' />
         <meta property='twitter:card' content='summary_large_image' />
