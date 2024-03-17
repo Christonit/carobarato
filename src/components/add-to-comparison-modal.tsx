@@ -72,6 +72,7 @@ const AddToComparisonModal = () => {
                   { label: 'La Sirena', value: 'sirena' },
                   { label: 'El Nacional', value: 'nacional' },
                   { label: 'Jumbo', value: 'jumbo' },
+                  { label: 'PriceSmart', value: 'pricesmart' },
                 ]}
               />
 

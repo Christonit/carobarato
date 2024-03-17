@@ -1,5 +1,6 @@
 import cx from 'classnames';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import type { Metadata } from 'next';
 import ProductsGrid from '../src/components/products-grid';
 import Sidebar from '../src/components/sidebar';
 import Row from '../src/components/Row';
@@ -10,8 +11,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toggleSidebar } from '../src/store/products/slice';
 import { RootState } from '../src/store';
 import AddToComparisonModal from '../src/components/add-to-comparison-modal';
+import Head from 'next/head';
+
+export const metadata: Metadata = {
+  title: 'Comparar',
+  description: 'Comparar tus productos favoritos',
+};
+
 export default function Desktop<NextPage>() {
-  // const [showSidebar, toggleSidebar] = useState(false);
   const dispatch = useDispatch();
   const { sidebarOpen, addToComparisson } = useSelector(
     (state: RootState) => state.products
@@ -29,6 +36,23 @@ export default function Desktop<NextPage>() {
   }, [windowWidth]);
   return (
     <>
+      <Head>
+        <title>Compara productos | Carobarato</title>
+        <meta property='og:title' content='Compara productos | Carobarato' />
+        <meta
+          property='twitter:title'
+          content='Compara productos | Carobarato'
+        />
+
+        <meta
+          name='description'
+          content='Encuentra el precio articulo que buscas en tus supermercados de preferencia.'
+        />
+        <meta
+          property='og:description'
+          content='Encuentra el precio articulo que buscas en tus supermercados de preferencia.'
+        />
+      </Head>
       <div>
         <Row className='bg-beige'>
           <Container>
@@ -39,8 +63,8 @@ export default function Desktop<NextPage>() {
                 </h1>
 
                 <p className='text-lglg:text-[24px] text-slate-400 font-regular '>
-                  Encuentra el precio articulo que buscas en tus
-                  supermercados de preferencia.
+                  Encuentra el precio articulo que buscas en tus supermercados
+                  de preferencia.
                 </p>
               </div>
 

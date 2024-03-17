@@ -14,7 +14,7 @@ import { RootState } from '../src/store';
 import FindIcon from '../src/components/icons/find';
 import CompareIcon from '../src/components/icons/compare';
 import ShopIcon from '../src/components/icons/shop';
-
+import Head from 'next/head';
 import Link from 'next/link';
 
 export default function Desktop<NextPage>() {
@@ -206,6 +206,27 @@ export default function Desktop<NextPage>() {
 
   return (
     <>
+      <Head>
+        <title>Encuentra y compara productos | Carobarato</title>
+        <meta
+          property='og:title'
+          content='Encuentra y compara productos | Carobarato'
+        />
+        <meta
+          property='twitter:title'
+          content='Encuentra y compara productos | Carobarato'
+        />
+
+        <meta
+          name='description'
+          content='Encuentra y compara precios de los productos que necesitas. Ingresa el producto que buscas, revisa y mide los precios uno al lado del otro & descubre dónde está el ahorro.'
+        />
+
+        <meta
+          property='og:description'
+          content='Encuentra y compara precios de los productos que necesitas. Ingresa el producto que buscas, revisa y mide los precios uno al lado del otro & descubre dónde está el ahorro.'
+        />
+      </Head>
       <Row className='bg-gold hero-section !pb-[0]'>
         <Container className='relative z-[2]'>
           <div className='flex  flex-col items-center mx-auto  gap-[20px] lg:gap-0 max-w-[900px]'>
@@ -215,8 +236,8 @@ export default function Desktop<NextPage>() {
               </h1>
 
               <p className='text-lg lg:text-[24px] text-slate-900 leading-relaxed font-medium text-center xl:px-[32px]'>
-              ¿Cuánto cuesta un litro de ron? ¿Cómo ahorrar en tu lista de compras?
-              ¿Cuál supermercado tiene la avena más económica?
+                ¿Cuánto cuesta un litro de ron? ¿Cómo ahorrar en tu lista de
+                compras? ¿Cuál supermercado tiene la avena más económica?
               </p>
               {/* <p className='text-lg lg:text-[24px] text-slate-900 leading-relaxed text-center font-medium '>
                 Todas estas preguntas las respondes con <u>Carobarato</u>.

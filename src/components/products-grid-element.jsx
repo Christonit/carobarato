@@ -1,13 +1,9 @@
 import React, { useState } from 'react';
-import CustomDropdown from './dropdown-select';
-import SearchBox from './search-box';
 import ProductCard from './product-card';
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
 import cx from 'classnames';
-import { Product } from '../types';
 import {
-  addToComparison,
   removeComparison,
   showAddToComparisson,
 } from '../store/products/slice'; // Import your specific action from redux
@@ -21,12 +17,10 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from 'recharts';
-import ApiService from '../utils/apiService';
-import debounce from 'lodash/debounce';
 import uniqueId from 'lodash/uniqueId';
 import { useDispatch, useSelector } from 'react-redux';
 import useDeviceSize from '../hooks';
-import { RootState } from '../store/index';
+
 const PriceComparison = ({ title }) => {
   const dispatch = useDispatch();
   const products = useSelector(state => state.products.comparissons[title]);
@@ -77,8 +71,8 @@ const PriceComparison = ({ title }) => {
     <div className='mb-[24px] md:mb-[64px] border-b border-slate-200 md:border-0 '>
       <div className='flex flex-col md:flex-row flex-wrap  items-center justify-between mb-[20px] lg:mb-[32px] gap-[24px]'>
         <div className='inline-flex md:flex-row flex-col lg:items-end gap-[8px] lg:gap-[16px] w-full md:w-auto'>
-          <div className='flex w-full md:w-auto items-center'>
-            <h2 className='font-bold text-lg lg:text-2xl leading-none max-w-[60%] lg:max-w-full'>
+          <div className='flex w-full md:w-auto items-start lg:items-center'>
+            <h2 className='font-bold text-lg lg:text-2xl leading-none max-w-[75%] lg:max-w-full'>
               {title}
               <span className='comparison-count ml-[8px] mr-[12px] lg:hidden'>
                 {products.length}
@@ -87,15 +81,16 @@ const PriceComparison = ({ title }) => {
 
             <button
               className='material-icons text-[20px] ml-auto lg:hidden'
-              onClick={() => dispatch(showAddToComparisson(title))}
-            >
-              add_circle_outline
-            </button>
-            <button
-              className='material-icons text-[20px] ml-[12px] lg:hidden'
               onClick={() => dispatch(removeComparison(title))}
             >
               delete_outline
+            </button>
+
+            <button
+              className='material-icons text-[20px] ml-[12px] lg:hidden'
+              onClick={() => dispatch(showAddToComparisson(title))}
+            >
+              add_circle_outline
             </button>
             <button
               className='material-icons text-[20px] ml-[8px] lg:hidden'
@@ -191,7 +186,6 @@ const PriceComparison = ({ title }) => {
                     src={`/images/${cheapestItem.value}.ico`}
                   />
                 </span>
-
                 {cheapestItem.name}
               </span>
             </div>

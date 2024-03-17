@@ -21,6 +21,8 @@ export default function ProductCard({
         return SUPERMERCADOS[1];
       case 'jumbo':
         return SUPERMERCADOS[2];
+      case 'pricesmart':
+        return SUPERMERCADOS[3];
       default:
         return SUPERMERCADOS[0];
     }
@@ -73,7 +75,9 @@ export default function ProductCard({
         </div>
         <div className='relative font-medium white-space-nowrap'>
           {windowWidth >= BREAKPOINTS.md
-            ? product_name
+            ? product_name.length > 60
+              ? truncateText(product_name, 56)
+              : product_name
             : windowWidth < BREAKPOINTS.md && windowWidth >= BREAKPOINTS.sm
             ? truncateText(product_name, 32)
             : truncateText(product_name, product_name.length > 17 ? 19 : 24)}

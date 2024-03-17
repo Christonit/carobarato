@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Product } from '../types';
 import cx from 'classnames';
+import debounce from 'lodash/debounce';
 const SearchBox = ({
   options,
   onSearch,
@@ -33,6 +34,11 @@ const SearchBox = ({
     }
   };
 
+  const debouncedSearchTerm = debounce((value: string) => {
+    console.log('debouncedSearchTerm', value);
+    onSearch(value);
+  }, 300);
+
   const handleKeyDown = (event: KeyboardEvent) => {
     if (event.key === 'Escape') {
       setIsOpen(false);
@@ -60,11 +66,14 @@ const SearchBox = ({
       document.removeEventListener('keydown', handleKeyDown);
     };
   }, [isOpen]);
-
   useEffect(() => {
-    if (searchTerm.length > 0) {
+    const timeoutId = setTimeout(() => {
       onSearch(searchTerm);
-    }
+    }, 300);
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
   }, [searchTerm]);
 
   return (
@@ -105,6 +114,8 @@ const SearchBox = ({
                   onClick={() => {
                     onSelected(option);
                     setIsOpen(false);
+                    inputRef.current!.value = '';
+                    setSearchTerm('');
                   }}
                   key={Math.random()}
                 >
