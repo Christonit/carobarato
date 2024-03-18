@@ -66,8 +66,9 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
               <div className='flex flex-row items-start justify-between gap-[20px]'>
                 <div>
                   <p className='text-slate-400 font-regular '>
-                    © {new Date().getFullYear()}. Hecho por{" "}
-                    <Link
+                    © {new Date().getFullYear()}. Just 4 fun.
+                    {/* Hecho por{" "} */}
+                    {/* <Link
                       href='https://www.linkedin.com/in/chrisalesant/'
                       target='_blank'
                     >
@@ -79,7 +80,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                       target='_blank'
                     >
                       Lesther Santana
-                    </Link>
+                    </Link> */}
                     .
                   </p>
                 </div>
