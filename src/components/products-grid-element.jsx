@@ -164,8 +164,8 @@ const PriceComparison = ({ title }) => {
               </ResponsiveContainer>
             </div>
             <div className='mt-[16px] md:mt-[32px] w-full'>
-              <h3 className='text-base text-slate-500 mb-[8px]'>
-                {cheapestItem.product_name}
+              <h3 className='text-base text-slate-500 mb-[8px]  capitalize'>
+                {cheapestItem.product_name.toLowerCase()}
               </h3>
               <h4 className='text-lg lg:text-xl text-slate-500 mb-[8px]'>
                 <b

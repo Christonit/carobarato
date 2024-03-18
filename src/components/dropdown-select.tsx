@@ -48,6 +48,9 @@ const CustomDropdown = ({
             <img
               className="dropdown-img h-full mx-auto block"
               src={`/images/${selectedOption.value}.ico`}
+              alt="Supermercado Icon"
+              width={24}
+              height={24}
             />
           </span>
           {selectedOption.label}

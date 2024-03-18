@@ -26,6 +26,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           content='/images/carobarato-og-thumbnail.png'
         />
 
+        <meta name="theme-color" content="#000000"/>
 
       </Head>
       <div

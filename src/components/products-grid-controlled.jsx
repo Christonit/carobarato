@@ -19,7 +19,7 @@ const PriceComparison = ({ title, products, showCount = false }) => {
   const [isOpen, setIsOpen] = useState(true);
   const toggling = () => setIsOpen(!isOpen);
   const [chartData] = useState(
-    products.map(item => {
+    products ? products.map(item => {
       const price = Number(item.prices[0].list_price);
       const discounted_price = Number(item.prices[0].discounted_price);
       return {
@@ -28,7 +28,7 @@ const PriceComparison = ({ title, products, showCount = false }) => {
         value: item.supermercado,
         Precio: discounted_price > 0 ? discounted_price : price,
       };
-    })
+    }) : []
   );
 
   const findCheapestItem = () => {
@@ -65,7 +65,7 @@ const PriceComparison = ({ title, products, showCount = false }) => {
             <h2 className='font-bold text-lg lg:text-2xl leading-none max-w-[75%] lg:max-w-full'>
               {title}
               {showCount && <span className='comparison-count ml-[8px] mr-[12px] lg:hidden'>
-                {products.length}
+                {products && products.length}
               </span>}
             </h2>
             <button
@@ -76,7 +76,7 @@ const PriceComparison = ({ title, products, showCount = false }) => {
             </button>
           </div>
 
-          {products.length && products[0] ? (
+          {products && products.length && products[0] ? (
             <span className='text-slate-400  text-base lg:text-lg'>
               Precios de fecha&nbsp;
               <span className='capitalize'>
@@ -98,11 +98,11 @@ const PriceComparison = ({ title, products, showCount = false }) => {
           }
         )}
       >
-        {products.map(item => (
+        {products && products.map(item => (
           <ProductCard key={uniqueId()} {...item} />
         ))}
 
-        {products.length > 1 && (
+        {products && products.length > 1 && (
           <div className='col-span-2 md:col-span-1 flex flex-col justify-center md:border-0 mt-[16px] md:mt-0 border-[2px] border-slate-200 p-[16px] md:p-0'>
             <div className='h-[280px] w-full '>
               <ResponsiveContainer width='100%' height='100%'>

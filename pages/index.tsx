@@ -134,6 +134,8 @@ const [recommended_products, set_recommended_products] = useState<any>([]);
           property='og:description'
           content='Ingresa el producto que buscas, revisa y mide los precios uno al lado del otro & descubre dónde está el ahorro.'
         />
+
+        <link rel="canonical" href="https://carobarato.com"/>
       </Head>
       <Row className='bg-gold hero-section !pb-[0] lg:pt-[124px]'>
         <Container className='relative z-[2]'>
@@ -147,9 +149,7 @@ const [recommended_products, set_recommended_products] = useState<any>([]);
                 ¿Cuánto cuesta un litro de ron? ¿Cómo ahorrar en tu lista de
                 compras? ¿Cuál supermercado tiene la avena más económica?
               </p>
-              {/* <p className='text-lg lg:text-[24px] text-slate-900 leading-relaxed text-center font-medium '>
-                Todas estas preguntas las respondes con <u>Carobarato</u>.
-              </p> */}
+            
 
               <Link
                 className='button-primary has-corners gold max-w-[220px] red mx-auto mt-[24px] lg:mt-[32px]'
@@ -168,6 +168,8 @@ const [recommended_products, set_recommended_products] = useState<any>([]);
                   loop
                   muted
                   playsInline
+                  width={892}
+                  height={536}
                 />
               ) : (
                 <video
@@ -177,6 +179,8 @@ const [recommended_products, set_recommended_products] = useState<any>([]);
                   loop
                   muted
                   playsInline
+                  width={'100%'}
+                  height={700}
                 />
               )}
             </div>
@@ -236,7 +240,7 @@ const [recommended_products, set_recommended_products] = useState<any>([]);
           <h2 className='text-[28px] xl:text-[48px] font-black mb-[32px]'>
             Búsquedas populares
           </h2>
-          {Object.keys(recommended_products).length ? (
+          {recommended_products && Object.keys(recommended_products).length > 0 ? (
             Object.entries(recommended_products).map(([key, products]) => {
               return <ProductsGridElement key={uniqueId()} title={key} products={products}/>;
             })

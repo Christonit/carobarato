@@ -52,6 +52,8 @@ export default function Desktop<NextPage>() {
           property='og:description'
           content='Encuentra el precio articulo que buscas en tus supermercados de preferencia.'
         />
+
+        <link rel="canonical" href="https://carobarato.com/comparar/"/>
       </Head>
       <div>
         <Row className='bg-beige'>

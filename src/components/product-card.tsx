@@ -35,6 +35,15 @@ export default function ProductCard({
     }
   };
 
+  const titleParser = (value: string) => {
+    return windowWidth >= BREAKPOINTS.md
+            ? value.length > 60
+              ? truncateText(value, 56)
+              : value
+            : windowWidth < BREAKPOINTS.md && windowWidth >= BREAKPOINTS.sm
+            ? truncateText(value, 32)
+            : truncateText(value, value.length > 17 ? 19 : 24)
+  }
   return (
     <div className='product-card' onClick={classToggler} ref={productCard}>
       {prices[0].discounted_price &&
@@ -51,7 +60,7 @@ export default function ProductCard({
         )}
 
       <div className='product-card-img'>
-        <img className='w-full' alt='' src={img_url} />
+        <img className='w-full' alt={product_name + ' Image'} src={img_url}  width={270} height={260}/>
       </div>
       <div className=' w-full flex flex-col items-start justify-start gap-[12px] bg-white relative z-[1]'>
         <div
@@ -73,14 +82,8 @@ export default function ProductCard({
               </s>
             )}
         </div>
-        <div className='relative font-medium white-space-nowrap'>
-          {windowWidth >= BREAKPOINTS.md
-            ? product_name.length > 60
-              ? truncateText(product_name, 56)
-              : product_name
-            : windowWidth < BREAKPOINTS.md && windowWidth >= BREAKPOINTS.sm
-            ? truncateText(product_name, 32)
-            : truncateText(product_name, product_name.length > 17 ? 19 : 24)}
+        <div className='relative font-medium white-space-nowrap capitalize'>
+          {titleParser(product_name).toLowerCase()}
         </div>
         <div
           className={cx('relative font-medium')}

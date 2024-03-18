@@ -13,7 +13,7 @@ export const SidebarProductCard = ({
   return (
     <div className="sidebar-comparison-item">
       <div className="sidebar-comparison-img">
-        <img className="w-full" alt={img_url} src={img_url} />
+        <img className="w-full" alt={product_name + ' Image'}  src={img_url} width={32} height={32} />
       </div>
       <div className="">
         <span className="relative block">
@@ -22,10 +22,10 @@ export const SidebarProductCard = ({
             {SUPERMERCADOS_OBJ[supermercado]}
           </span>
         </span>
-        <span className="relative font-regular text-slate-400 product-name">
-          {windowWidth > BREAKPOINTS.md
+        <span className="relative font-regular text-slate-400 product-name capitalize">
+          {(windowWidth > BREAKPOINTS.md
             ? truncateText(product_name, 36)
-            : product_name}
+            : product_name).toLowerCase()}
         </span>
       </div>
 
