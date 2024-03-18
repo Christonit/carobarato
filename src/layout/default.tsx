@@ -26,7 +26,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           content='/images/carobarato-og-thumbnail.png'
         />
 
-        
+
       </Head>
       <div
         className={cx('app-body w-full  relative bg-white overflow-hidden ', {
@@ -49,12 +49,12 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
               <Link href='/comparar' className='relative font-bold py-[8px]'>
                 Comparar
               </Link>
-              <Link
+              {/* <Link
                 href={'/#about'}
                 className='relative whitespace-nowrap font-bold py-[8px] hidden lg:inline-block '
               >
                 Acerca de la herramienta
-              </Link>
+              </Link> */}
             </div>
           </Container>
         </header>
@@ -66,8 +66,10 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
               <div className='flex flex-row items-start justify-between gap-[20px]'>
                 <div>
                   <p className='text-slate-400 font-regular '>
-                    © {new Date().getFullYear()}. Hecho por Christopher Santana
-                    & Lesther Santana.
+                    © {new Date().getFullYear()}. Hecho por <Link href='https://www.linkedin.com/in/chrisalesant/' target='_blank'>Christopher Santana</Link> 
+                    & <Link href='https://www.linkedin.com/in/lesther-santana/' target='_blank'>
+                      Lesther Santana
+                    </Link>.
                   </p>
                 </div>
               </div>

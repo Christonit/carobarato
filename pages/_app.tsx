@@ -41,11 +41,11 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <PostHogProvider client={posthog}>
-    <Provider store={store}>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-    </Provider>
+      <Provider store={store}>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </Provider>
     </PostHogProvider>
   );
 }
