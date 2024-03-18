@@ -81,7 +81,6 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                     >
                       Lesther Santana
                     </Link> */}
-                    .
                   </p>
                 </div>
               </div>

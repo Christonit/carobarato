@@ -158,7 +158,7 @@ export default function Desktop<NextPage>() {
               </Link>
             </div>
 
-            <div className='has-corners alt '>
+            <div className='has-corners alt overflow-hidden lg:max-h-[500px]'>
               {windowWidth > BREAKPOINTS.lg ? (
                 <video
                   className=' w-full '
