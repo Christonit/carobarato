@@ -1,14 +1,14 @@
-import { useState, useEffect } from 'react';
-import debounce from 'lodash/debounce';
-import ApiService from '../utils/apiService';
-import { Product } from '../types';
-import SearchBox from './search-box';
-import CustomDropdown from './dropdown-select';
-import { SidebarProductCard } from './SidebarProductCard';
-import uniqueId from 'lodash/uniqueId';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../store/index';
-import { setComparison, showAddToComparisson } from '../store/products/slice';
+import { useState, useEffect } from "react";
+import debounce from "lodash/debounce";
+import ApiService from "../utils/apiService";
+import { Product } from "../types";
+import SearchBox from "./search-box";
+import CustomDropdown from "./dropdown-select";
+import { SidebarProductCard } from "./SidebarProductCard";
+import uniqueId from "lodash/uniqueId";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../store/index";
+import { setComparison, showAddToComparisson } from "../store/products/slice";
 
 const AddToComparisonModal = () => {
   const comparisonKey = useSelector(
@@ -24,8 +24,8 @@ const AddToComparisonModal = () => {
   const [articleOptions, setArticleOptions] = useState<Product[]>(comparison);
   const [searchArticleOptions, setSearchArticleOptions] =
     useState<Product[]>(comparison);
-  const [searchTerm, setSearchTerm] = useState<string>('');
-  const [supermarket, setSupermarket] = useState<string>('');
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [supermarket, setSupermarket] = useState<string>("");
   const dispatch = useDispatch();
   const searchProducts = debounce(async () => {
     const { data } = await ApiService.getProducts(searchTerm, supermarket);
@@ -36,10 +36,10 @@ const AddToComparisonModal = () => {
   }, 300);
 
   useEffect(() => {
-    if (searchTerm !== '' && supermarket !== '') {
+    if (searchTerm !== "" && supermarket !== "") {
       searchProducts();
     }
-    if (searchTerm === '') {
+    if (searchTerm === "") {
       setSearchArticleOptions([]);
     }
   }, [searchTerm, supermarket]);
@@ -69,10 +69,10 @@ const AddToComparisonModal = () => {
                 }}
                 placeholder='Seleccionar supermercado'
                 options={[
-                  { label: 'La Sirena', value: 'sirena' },
-                  { label: 'El Nacional', value: 'nacional' },
-                  { label: 'Jumbo', value: 'jumbo' },
-                  { label: 'PriceSmart', value: 'pricesmart' },
+                  { label: "La Sirena", value: "sirena" },
+                  { label: "El Nacional", value: "nacional" },
+                  { label: "Jumbo", value: "jumbo" },
+                  { label: "PriceSmart", value: "pricesmart" },
                 ]}
               />
 

@@ -64,7 +64,7 @@ const ApiService = {
     try {
       const response: AxiosResponse<ApiResponse<Product[]>> =
         await axiosInstance.post("/specific-products/", {
-          search : payload
+          search: payload,
         });
 
       return { data: response.data, status: response.status }; // Include status code in successful response

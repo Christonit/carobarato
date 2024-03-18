@@ -1,6 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit';
-import type { PayloadAction } from '@reduxjs/toolkit';
-import { Product, Price } from '../../types';
+import { createSlice } from "@reduxjs/toolkit";
+import type { PayloadAction } from "@reduxjs/toolkit";
+import { Product, Price } from "../../types";
 
 export interface CounterState {
   comparissons: {
@@ -17,7 +17,7 @@ const initialState: CounterState = {
 };
 
 export const counterSlice = createSlice({
-  name: 'comparisons',
+  name: "comparisons",
   initialState,
   reducers: {
     toggleSidebar: state => {

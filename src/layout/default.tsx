@@ -1,14 +1,14 @@
-import Container from '../components/container';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { useSelector } from 'react-redux';
-import { RootState } from '../store';
-import cx from 'classnames';
-import Row from '../components/Row';
-import Head from 'next/head';
+import Container from "../components/container";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
+import { RootState } from "../store";
+import cx from "classnames";
+import Row from "../components/Row";
+import Head from "next/head";
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
-  const isHome = router.pathname === '/' || router.pathname === '/home';
+  const isHome = router.pathname === "/" || router.pathname === "/home";
   const { sidebarOpen } = useSelector((state: RootState) => state.products);
 
   return (
@@ -26,15 +26,14 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           content='/images/carobarato-og-thumbnail.png'
         />
 
-        <meta name="theme-color" content="#000000"/>
-
+        <meta name='theme-color' content='#000000' />
       </Head>
       <div
-        className={cx('app-body w-full  relative bg-white overflow-hidden ', {
-          'has-sidebar': sidebarOpen && !isHome,
+        className={cx("app-body w-full  relative bg-white overflow-hidden ", {
+          "has-sidebar": sidebarOpen && !isHome,
         })}
       >
-        <header className={`w-full   ${isHome ? 'is-home' : ''}`}>
+        <header className={`w-full   ${isHome ? "is-home" : ""}`}>
           <Container className='flex flex-row items-center justify-between'>
             <Link
               href='/'
@@ -67,10 +66,21 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
               <div className='flex flex-row items-start justify-between gap-[20px]'>
                 <div>
                   <p className='text-slate-400 font-regular '>
-                    © {new Date().getFullYear()}. Hecho por <Link href='https://www.linkedin.com/in/chrisalesant/' target='_blank'>Christopher Santana</Link> 
-                    & <Link href='https://www.linkedin.com/in/lesther-santana/' target='_blank'>
+                    © {new Date().getFullYear()}. Hecho por{" "}
+                    <Link
+                      href='https://www.linkedin.com/in/chrisalesant/'
+                      target='_blank'
+                    >
+                      Christopher Santana
+                    </Link>
+                    &{" "}
+                    <Link
+                      href='https://www.linkedin.com/in/lesther-santana/'
+                      target='_blank'
+                    >
                       Lesther Santana
-                    </Link>.
+                    </Link>
+                    .
                   </p>
                 </div>
               </div>
@@ -78,8 +88,6 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           </Row>
         </footer>
       </div>
-
-      
     </>
   );
 };

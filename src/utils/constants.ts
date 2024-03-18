@@ -1,21 +1,21 @@
-export const NUEVA_COMPARACION = 'Nueva comparacion';
-export const SUPERMERCADOS = ['La Sirena', 'Nacional', 'Jumbo', 'PriceSmart'];
+export const NUEVA_COMPARACION = "Nueva comparacion";
+export const SUPERMERCADOS = ["La Sirena", "Nacional", "Jumbo", "PriceSmart"];
 export const SUPERMERCADOS_OBJ: {
   [key: string]: string;
 } = {
-  'la-sirena': 'La Sirena',
-  nacional: 'Nacional',
-  jumbo: 'Jumbo',
-  pricesmart: 'PriceSmart',
+  "la-sirena": "La Sirena",
+  nacional: "Nacional",
+  jumbo: "Jumbo",
+  pricesmart: "PriceSmart",
 };
 
 export const COLORS: {
   [key: string]: string;
 } = {
-  'la-sirena': '#1e22aa',
-  nacional: '#497637',
-  jumbo: '#ef3e42',
-  pricesmart: '#182958',
+  "la-sirena": "#1e22aa",
+  nacional: "#497637",
+  jumbo: "#ef3e42",
+  pricesmart: "#182958",
 };
 
 export const BREAKPOINTS = {

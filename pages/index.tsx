@@ -1,30 +1,30 @@
-import cx from 'classnames';
-import { useEffect, useState } from 'react';
-import Row from '../src/components/Row';
-import Container from '../src/components/container';
-import { format } from 'date-fns';
-import { es } from 'date-fns/locale';
-import uniqueId from 'lodash/uniqueId';
-import ProductCard from '../src/components/product-card';
-import ProductsGridElement from '../src/components/products-grid-controlled';
-import useDeviceSize from '../src/hooks';
-import { BREAKPOINTS } from '../src/utils/constants';
-import { useDispatch, useSelector } from 'react-redux';
-import { toggleSidebar } from '../src/store/products/slice';
-import { RootState } from '../src/store';
-import FindIcon from '../src/components/icons/find';
-import CompareIcon from '../src/components/icons/compare';
-import ShopIcon from '../src/components/icons/shop';
-import Head from 'next/head';
-import Link from 'next/link';
-import ApiService from '../src/utils/apiService';
-import { Product } from '../src/types';
+import cx from "classnames";
+import { useEffect, useState } from "react";
+import Row from "../src/components/Row";
+import Container from "../src/components/container";
+import { format } from "date-fns";
+import { es } from "date-fns/locale";
+import uniqueId from "lodash/uniqueId";
+import ProductCard from "../src/components/product-card";
+import ProductsGridElement from "../src/components/products-grid-controlled";
+import useDeviceSize from "../src/hooks";
+import { BREAKPOINTS } from "../src/utils/constants";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleSidebar } from "../src/store/products/slice";
+import { RootState } from "../src/store";
+import FindIcon from "../src/components/icons/find";
+import CompareIcon from "../src/components/icons/compare";
+import ShopIcon from "../src/components/icons/shop";
+import Head from "next/head";
+import Link from "next/link";
+import ApiService from "../src/utils/apiService";
+import { Product } from "../src/types";
 export default function Desktop<NextPage>() {
   // const [showSidebar, toggleSidebar] = useState(false);
   const dispatch = useDispatch();
 
   const { windowWidth } = useDeviceSize();
-const [recommended_products, set_recommended_products] = useState<any>([]);
+  const [recommended_products, set_recommended_products] = useState<any>([]);
   const sidenavToggle = () => {
     dispatch(toggleSidebar());
   };
@@ -37,81 +37,81 @@ const [recommended_products, set_recommended_products] = useState<any>([]);
   const SAMPLE_SEARCH = [
     [
       {
-        "product": "CAMARON CRUDO WALA 21/25",
-        "supermarket": "sirena"
+        product: "CAMARON CRUDO WALA 21/25",
+        supermarket: "sirena",
       },
       {
-        "product": "Cola De Camarón Crudo 16/20 Congelada, Lb",
-        "supermarket": "nacional"
+        product: "Cola De Camarón Crudo 16/20 Congelada, Lb",
+        supermarket: "nacional",
       },
       {
-        "product": "Camarón Crudo 16/20 Líder 1 Lb",
-        "supermarket": "jumbo"
+        product: "Camarón Crudo 16/20 Líder 1 Lb",
+        supermarket: "jumbo",
       },
       {
-        "product": "Vima Camarón Crudo Congelado 21-25 Bolsa 1 kg / 2.2 lb",
-        "supermarket": "pricesmart"
-      }
+        product: "Vima Camarón Crudo Congelado 21-25 Bolsa 1 kg / 2.2 lb",
+        supermarket: "pricesmart",
+      },
     ],
     [
       {
-           "supermarket": "sirena",
-           "product": "PLATANO VERDE UND"
-         },
-         {
-           "supermarket": "jumbo",
-           "product": "Plátano Verde"
-         },
-         {
-           "supermarket": "nacional",
-           "product": "Platano Verde"
-         },
-         {
-           "supermarket": "pricesmart",
-           "product": "Selection Plátano Verde 8 Unidades"
-         }
-     ],
-     [
+        supermarket: "sirena",
+        product: "PLATANO VERDE UND",
+      },
       {
-          "supermarket": "sirena",
-          "product": "RON XV RESERVA BRUGAL 700 ML"
-        },
-        {
-          "supermarket": "nacional",
-          "product": "Ron Xv Brugal 70 Cl"
-        },
-         {
-          "supermarket": "jumbo",
-          "product": "Ron Xv Brugal 70 Cl"
-        },
-        {
-          "supermarket": "pricesmart",
-          "product": "Brugal Ron Reserva Especial XV en Botella de 700 ml"
-        }
-    ]
-
-  ]
+        supermarket: "jumbo",
+        product: "Plátano Verde",
+      },
+      {
+        supermarket: "nacional",
+        product: "Platano Verde",
+      },
+      {
+        supermarket: "pricesmart",
+        product: "Selection Plátano Verde 8 Unidades",
+      },
+    ],
+    [
+      {
+        supermarket: "sirena",
+        product: "RON XV RESERVA BRUGAL 700 ML",
+      },
+      {
+        supermarket: "nacional",
+        product: "Ron Xv Brugal 70 Cl",
+      },
+      {
+        supermarket: "jumbo",
+        product: "Ron Xv Brugal 70 Cl",
+      },
+      {
+        supermarket: "pricesmart",
+        product: "Brugal Ron Reserva Especial XV en Botella de 700 ml",
+      },
+    ],
+  ];
 
   const fetchRecommendations = async () => {
-    const results = await Promise.all( SAMPLE_SEARCH.map( async (array) => {
-      const { data } = await ApiService.getSpecificProducts(array);
-      return data
-    }))
+    const results = await Promise.all(
+      SAMPLE_SEARCH.map(async array => {
+        const { data } = await ApiService.getSpecificProducts(array);
+        return data;
+      })
+    );
 
-    const payload : {[key : string] : Product[]} = {
-      'Camarones Crudos': results[0],
-      'Plátano Verde': results[1],
-      'Ron Brugal XV': results[2]
-    }
-    set_recommended_products(payload)
-  }
+    const payload: { [key: string]: Product[] } = {
+      "Camarones Crudos": results[0],
+      "Plátano Verde": results[1],
+      "Ron Brugal XV": results[2],
+    };
+    set_recommended_products(payload);
+  };
 
   useEffect(() => {
-    if(recommended_products.length === 0){ 
-      fetchRecommendations()
+    if (recommended_products.length === 0) {
+      fetchRecommendations();
     }
-
-  },[recommended_products])
+  }, [recommended_products]);
   return (
     <>
       <Head>
@@ -135,7 +135,7 @@ const [recommended_products, set_recommended_products] = useState<any>([]);
           content='Ingresa el producto que buscas, revisa y mide los precios uno al lado del otro & descubre dónde está el ahorro.'
         />
 
-        <link rel="canonical" href="https://carobarato.com"/>
+        <link rel='canonical' href='https://carobarato.com' />
       </Head>
       <Row className='bg-gold hero-section !pb-[0] lg:pt-[124px]'>
         <Container className='relative z-[2]'>
@@ -149,7 +149,6 @@ const [recommended_products, set_recommended_products] = useState<any>([]);
                 ¿Cuánto cuesta un litro de ron? ¿Cómo ahorrar en tu lista de
                 compras? ¿Cuál supermercado tiene la avena más económica?
               </p>
-            
 
               <Link
                 className='button-primary has-corners gold max-w-[220px] red mx-auto mt-[24px] lg:mt-[32px]'
@@ -179,14 +178,14 @@ const [recommended_products, set_recommended_products] = useState<any>([]);
                   loop
                   muted
                   playsInline
-                  width={'100%'}
+                  width={"100%"}
                   height={700}
                 />
               )}
             </div>
           </div>
         </Container>
-        <div className='cutout'/>
+        <div className='cutout' />
       </Row>
 
       <Row className='bg-[#FFFEE7] '>
@@ -207,7 +206,9 @@ const [recommended_products, set_recommended_products] = useState<any>([]);
               <span className='icon mb-[24px]'>
                 <FindIcon />
               </span>
-              <h4 className='text-[20px] lg:text-[32px] font-black mb-[16px] lg:mb-[24px]'>Encuentra</h4>
+              <h4 className='text-[20px] lg:text-[32px] font-black mb-[16px] lg:mb-[24px]'>
+                Encuentra
+              </h4>
               <p className='text-[18px] lg:text-[24px] mb-[16px]'>
                 Ingresa el producto que buscas.
               </p>
@@ -216,7 +217,9 @@ const [recommended_products, set_recommended_products] = useState<any>([]);
               <span className='icon mb-[24px]'>
                 <CompareIcon />
               </span>
-              <h4 className='text-[20px] lg:text-[32px] font-black mb-[16px] lg:mb-[24px]'>Compara</h4>
+              <h4 className='text-[20px] lg:text-[32px] font-black mb-[16px] lg:mb-[24px]'>
+                Compara
+              </h4>
               <p className='text-[18px] lg:text-[24px] mb-[16px]'>
                 Revisa y mide los precios uno al lado del otro.
               </p>
@@ -240,11 +243,17 @@ const [recommended_products, set_recommended_products] = useState<any>([]);
           <h2 className='text-[28px] xl:text-[48px] font-black mb-[32px]'>
             Búsquedas populares
           </h2>
-          {recommended_products && Object.keys(recommended_products).length > 0 ? (
-            Object.entries(recommended_products).map(([key, products]) => {
-              return <ProductsGridElement key={uniqueId()} title={key} products={products}/>;
-            })
-          ) : null }
+          {recommended_products && Object.keys(recommended_products).length > 0
+            ? Object.entries(recommended_products).map(([key, products]) => {
+                return (
+                  <ProductsGridElement
+                    key={uniqueId()}
+                    title={key}
+                    products={products}
+                  />
+                );
+              })
+            : null}
         </Container>
       </Row>
     </>

@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import ProductCard from './product-card';
-import { format } from 'date-fns';
-import { es } from 'date-fns/locale';
-import cx from 'classnames';
+import React, { useState } from "react";
+import ProductCard from "./product-card";
+import { format } from "date-fns";
+import { es } from "date-fns/locale";
+import cx from "classnames";
 import {
   removeComparison,
   showAddToComparisson,
-} from '../store/products/slice'; // Import your specific action from redux
-import { SUPERMERCADOS_OBJ, COLORS, BREAKPOINTS } from '../utils/constants';
+} from "../store/products/slice"; // Import your specific action from redux
+import { SUPERMERCADOS_OBJ, COLORS, BREAKPOINTS } from "../utils/constants";
 import {
   BarChart,
   Bar,
@@ -16,10 +16,10 @@ import {
   YAxis,
   Tooltip,
   ResponsiveContainer,
-} from 'recharts';
-import uniqueId from 'lodash/uniqueId';
-import { useDispatch, useSelector } from 'react-redux';
-import useDeviceSize from '../hooks';
+} from "recharts";
+import uniqueId from "lodash/uniqueId";
+import { useDispatch, useSelector } from "react-redux";
+import useDeviceSize from "../hooks";
 
 const PriceComparison = ({ title }) => {
   const dispatch = useDispatch();
@@ -96,7 +96,7 @@ const PriceComparison = ({ title }) => {
               className='material-icons text-[20px] ml-[8px] lg:hidden'
               onClick={toggling}
             >
-              {!isOpen ? 'expand_more' : 'expand_less'}
+              {!isOpen ? "expand_more" : "expand_less"}
             </button>
           </div>
 
@@ -104,7 +104,7 @@ const PriceComparison = ({ title }) => {
             <span className='text-slate-400  text-base lg:text-lg'>
               Precios de fecha&nbsp;
               <span className='capitalize'>
-                {format(products[0].prices[0].created_at, 'MMMM d, yyyy', {
+                {format(products[0].prices[0].created_at, "MMMM d, yyyy", {
                   locale: es,
                 })}
               </span>
@@ -133,13 +133,13 @@ const PriceComparison = ({ title }) => {
 
       <div
         className={cx(
-          'grid grid-cols-2   2xl:grid-cols-4  gap-[12px] md:gap-[32px] w-full align-center accordion',
+          "grid grid-cols-2   2xl:grid-cols-4  gap-[12px] md:gap-[32px] w-full align-center accordion",
           {
             collapsed: !isOpen,
-            'xl:grid-cols-4': !sidebarOpen,
-            'xl:grid-cols-3': sidebarOpen,
-            'lg:grid-cols-3': !sidebarOpen,
-            'lg:grid-cols-2': sidebarOpen,
+            "xl:grid-cols-4": !sidebarOpen,
+            "xl:grid-cols-3": sidebarOpen,
+            "lg:grid-cols-3": !sidebarOpen,
+            "lg:grid-cols-2": sidebarOpen,
           }
         )}
       >
@@ -158,7 +158,7 @@ const PriceComparison = ({ title }) => {
                     ))}
                   </Bar>
                   <YAxis />
-                  <XAxis dataKey={'name'} />
+                  <XAxis dataKey={"name"} />
                   <Tooltip cursor={false} />
                 </BarChart>
               </ResponsiveContainer>

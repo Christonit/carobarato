@@ -11,27 +11,34 @@ export const SidebarProductCard = ({
 }: BasicInfo & { removeFromList: (value: string) => void }) => {
   const { windowWidth } = useDeviceSize();
   return (
-    <div className="sidebar-comparison-item">
-      <div className="sidebar-comparison-img">
-        <img className="w-full" alt={product_name + ' Image'}  src={img_url} width={32} height={32} />
+    <div className='sidebar-comparison-item'>
+      <div className='sidebar-comparison-img'>
+        <img
+          className='w-full'
+          alt={product_name + " Image"}
+          src={img_url}
+          width={32}
+          height={32}
+        />
       </div>
-      <div className="">
-        <span className="relative block">
+      <div className=''>
+        <span className='relative block'>
           <b>${prices[0].list_price}</b>{" "}
           <span style={{ color: COLORS[supermercado] }}>
             {SUPERMERCADOS_OBJ[supermercado]}
           </span>
         </span>
-        <span className="relative font-regular text-slate-400 product-name capitalize">
+        <span className='relative font-regular text-slate-400 product-name capitalize'>
           {(windowWidth > BREAKPOINTS.md
             ? truncateText(product_name, 36)
-            : product_name).toLowerCase()}
+            : product_name
+          ).toLowerCase()}
         </span>
       </div>
 
       <button
         onClick={() => removeFromList(product_name)}
-        className="ml-auto material-icons delete-btn text-slate-500 !text-[20px] rounded-full border border-slate-300 h-[24px] min-w-[24px]"
+        className='ml-auto material-icons delete-btn text-slate-500 !text-[20px] rounded-full border border-slate-300 h-[24px] min-w-[24px]'
       >
         close
       </button>

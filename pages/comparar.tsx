@@ -1,21 +1,21 @@
-import cx from 'classnames';
-import { useEffect } from 'react';
-import type { Metadata } from 'next';
-import ProductsGrid from '../src/components/products-grid';
-import Sidebar from '../src/components/sidebar';
-import Row from '../src/components/Row';
-import Container from '../src/components/container';
-import useDeviceSize from '../src/hooks';
-import { BREAKPOINTS } from '../src/utils/constants';
-import { useDispatch, useSelector } from 'react-redux';
-import { toggleSidebar } from '../src/store/products/slice';
-import { RootState } from '../src/store';
-import AddToComparisonModal from '../src/components/add-to-comparison-modal';
-import Head from 'next/head';
+import cx from "classnames";
+import { useEffect } from "react";
+import type { Metadata } from "next";
+import ProductsGrid from "../src/components/products-grid";
+import Sidebar from "../src/components/sidebar";
+import Row from "../src/components/Row";
+import Container from "../src/components/container";
+import useDeviceSize from "../src/hooks";
+import { BREAKPOINTS } from "../src/utils/constants";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleSidebar } from "../src/store/products/slice";
+import { RootState } from "../src/store";
+import AddToComparisonModal from "../src/components/add-to-comparison-modal";
+import Head from "next/head";
 
 export const metadata: Metadata = {
-  title: 'Comparar',
-  description: 'Comparar tus productos favoritos',
+  title: "Comparar",
+  description: "Comparar tus productos favoritos",
 };
 
 export default function Desktop<NextPage>() {
@@ -53,7 +53,7 @@ export default function Desktop<NextPage>() {
           content='Encuentra el precio articulo que buscas en tus supermercados de preferencia.'
         />
 
-        <link rel="canonical" href="https://carobarato.com/comparar/"/>
+        <link rel='canonical' href='https://carobarato.com/comparar/' />
       </Head>
       <div>
         <Row className='bg-beige'>
@@ -94,7 +94,7 @@ export default function Desktop<NextPage>() {
           </Container>
         </Row>
       </div>
-      <div className={cx(['sidebar-container', { show: sidebarOpen }])}>
+      <div className={cx(["sidebar-container", { show: sidebarOpen }])}>
         <Sidebar />
       </div>
 

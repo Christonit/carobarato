@@ -1,26 +1,26 @@
-import React, { useEffect, useState } from 'react';
-import ClosingFrames from './closing-frames';
-import ApiService from '../utils/apiService';
-import debounce from 'lodash/debounce';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useState } from "react";
+import ClosingFrames from "./closing-frames";
+import ApiService from "../utils/apiService";
+import debounce from "lodash/debounce";
+import { useDispatch } from "react-redux";
 import {
   setComparison,
   addToComparison,
   removeFromComparison,
   toggleSidebar,
-} from '../store/products/slice';
-import SearchBox from '../components/search-box';
-import CustomDropdown from './dropdown-select';
-import { useSelector } from 'react-redux';
-import type { RootState } from '../store/index';
-import { Product } from '../types';
-import { NUEVA_COMPARACION } from '../utils/constants';
-import { SidebarProductCard } from './SidebarProductCard';
-import { uniqueId } from 'lodash';
+} from "../store/products/slice";
+import SearchBox from "../components/search-box";
+import CustomDropdown from "./dropdown-select";
+import { useSelector } from "react-redux";
+import type { RootState } from "../store/index";
+import { Product } from "../types";
+import { NUEVA_COMPARACION } from "../utils/constants";
+import { SidebarProductCard } from "./SidebarProductCard";
+import { uniqueId } from "lodash";
 const Sidebar = () => {
   const [isSearchLoading, setIsSearchLoading] = useState<boolean>(false);
-  const [searchTerm, setSearchTerm] = useState<string>('');
-  const [supermarket, setSupermarket] = useState<string>('');
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [supermarket, setSupermarket] = useState<string>("");
   const [comparissonList, setComparissonList] = useState<{
     selected: string;
     options: string[];
@@ -64,10 +64,10 @@ const Sidebar = () => {
   };
 
   useEffect(() => {
-    if (searchTerm !== '' && supermarket !== '') {
+    if (searchTerm !== "" && supermarket !== "") {
       searchProducts();
     }
-    if (searchTerm === '') {
+    if (searchTerm === "") {
       setArticleOptions([]);
     }
   }, [searchTerm, supermarket]);
@@ -91,14 +91,14 @@ const Sidebar = () => {
         {comparissonList?.options.length && (
           <CustomDropdown
             onChange={prop => {
-              if (typeof prop !== 'string') return;
+              if (typeof prop !== "string") return;
 
               setComparissonList({
                 ...comparissonList,
                 selected: prop,
               });
             }}
-            placeholder={comparissonList.selected || 'Seleccionar lista'}
+            placeholder={comparissonList.selected || "Seleccionar lista"}
             options={[...comparissonList?.options, NUEVA_COMPARACION]}
           />
         )}
@@ -109,10 +109,10 @@ const Sidebar = () => {
           }}
           placeholder='Seleccionar supermercado'
           options={[
-            { label: 'La Sirena', value: 'sirena' },
-            { label: 'El Nacional', value: 'nacional' },
-            { label: 'Jumbo', value: 'jumbo' },
-            { label: 'PriceSmart', value: 'pricesmart' },
+            { label: "La Sirena", value: "sirena" },
+            { label: "El Nacional", value: "nacional" },
+            { label: "Jumbo", value: "jumbo" },
+            { label: "PriceSmart", value: "pricesmart" },
           ]}
         />
 
@@ -139,7 +139,7 @@ const Sidebar = () => {
             return (
               <div className='sidebar-comparison-block' key={uniqueId()}>
                 <div className='flex gap-[12px] mb-[16px]'>
-                  <b className='relative'>{key}</b>{' '}
+                  <b className='relative'>{key}</b>{" "}
                   <span className='comparison-count'>{value.length}</span>
                 </div>
                 <div className='sidebar-comparison-items'>

@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { BREAKPOINTS } from '../utils/constants';
+import { useState, useEffect } from "react";
+import { BREAKPOINTS } from "../utils/constants";
 interface Breakpoints {
   xs: number;
   sm: number;
@@ -29,17 +29,17 @@ const useDeviceSize = (): DeviceInfo => {
     let newSize: string;
 
     if (screenWidth < BREAKPOINTS.sm) {
-      newSize = 'xs';
+      newSize = "xs";
     } else if (screenWidth < BREAKPOINTS.md) {
-      newSize = 'sm';
+      newSize = "sm";
     } else if (screenWidth < BREAKPOINTS.lg) {
-      newSize = 'md';
+      newSize = "md";
     } else if (screenWidth < BREAKPOINTS.xl) {
-      newSize = 'lg';
+      newSize = "lg";
     } else if (screenWidth < BREAKPOINTS.xxl) {
-      newSize = 'xl';
+      newSize = "xl";
     } else {
-      newSize = 'xxl';
+      newSize = "xxl";
     }
 
     setDeviceInfo({
@@ -65,10 +65,10 @@ const useDeviceSize = (): DeviceInfo => {
       checkDeviceSize();
     };
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 

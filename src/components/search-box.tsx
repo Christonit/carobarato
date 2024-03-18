@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { Product } from '../types';
-import cx from 'classnames';
-import debounce from 'lodash/debounce';
+import React, { useEffect, useState, useRef } from "react";
+import { Product } from "../types";
+import cx from "classnames";
+import debounce from "lodash/debounce";
 const SearchBox = ({
   options,
   onSearch,
@@ -24,7 +24,7 @@ const SearchBox = ({
   const dropdownRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const [searchTerm, setSearchTerm] = useState<string>('');
+  const [searchTerm, setSearchTerm] = useState<string>("");
   const handleClickOutside = (event: MouseEvent) => {
     if (
       dropdownRef.current &&
@@ -35,12 +35,12 @@ const SearchBox = ({
   };
 
   const debouncedSearchTerm = debounce((value: string) => {
-    console.log('debouncedSearchTerm', value);
+    console.log("debouncedSearchTerm", value);
     onSearch(value);
   }, 300);
 
   const handleKeyDown = (event: KeyboardEvent) => {
-    if (event.key === 'Escape') {
+    if (event.key === "Escape") {
       setIsOpen(false);
     }
   };
@@ -55,15 +55,15 @@ const SearchBox = ({
 
   useEffect(() => {
     if (isOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-      document.addEventListener('keydown', handleKeyDown);
+      document.addEventListener("mousedown", handleClickOutside);
+      document.addEventListener("keydown", handleKeyDown);
     } else {
-      document.removeEventListener('mousedown', handleClickOutside);
-      document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleKeyDown);
     }
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-      document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleKeyDown);
     };
   }, [isOpen]);
   useEffect(() => {
@@ -77,7 +77,7 @@ const SearchBox = ({
   }, [searchTerm]);
 
   return (
-    <div className={cx('dropdown', className)} ref={dropdownRef}>
+    <div className={cx("dropdown", className)} ref={dropdownRef}>
       <div className='dropdown-header'>
         <div className='material-icons input-icon'>search</div>
         <input
@@ -94,9 +94,9 @@ const SearchBox = ({
         {searchTerm.length > 0 && (
           <button
             onClick={() => {
-              inputRef.current!.value = '';
-              setSearchTerm('');
-              onSearch('');
+              inputRef.current!.value = "";
+              setSearchTerm("");
+              onSearch("");
             }}
             className='ml-auto material-icons delete-btn text-slate-500 !text-[20px] rounded-full border border-slate-300 h-[24px] min-w-[24px]'
           >
@@ -114,8 +114,8 @@ const SearchBox = ({
                   onClick={() => {
                     onSelected(option);
                     setIsOpen(false);
-                    inputRef.current!.value = '';
-                    setSearchTerm('');
+                    inputRef.current!.value = "";
+                    setSearchTerm("");
                   }}
                   key={Math.random()}
                 >

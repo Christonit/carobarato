@@ -38,17 +38,17 @@ const CustomDropdown = ({
   const selectedOptionComponent = () => {
     if (selectedOption) {
       return typeof selectedOption === "string" ? (
-        <span className="w-full overflow-hidden text-ellipsis whitespace-nowrap">
+        <span className='w-full overflow-hidden text-ellipsis whitespace-nowrap'>
           {" "}
           {selectedOption}
         </span>
       ) : (
         <>
-          <span className="w-[24px] h-[24px]">
+          <span className='w-[24px] h-[24px]'>
             <img
-              className="dropdown-img h-full mx-auto block"
+              className='dropdown-img h-full mx-auto block'
               src={`/images/${selectedOption.value}.ico`}
-              alt="Supermercado Icon"
+              alt='Supermercado Icon'
               width={24}
               height={24}
             />
@@ -90,26 +90,26 @@ const CustomDropdown = ({
 
   return (
     <div className={cx("dropdown", className)} ref={dropdownRef}>
-      <div className="dropdown-header" onClick={toggling}>
+      <div className='dropdown-header' onClick={toggling}>
         {selectedOption ? (
           selectedOptionComponent()
         ) : (
-          <span className="w-full overflow-hidden text-ellipsis whitespace-nowrap">
+          <span className='w-full overflow-hidden text-ellipsis whitespace-nowrap'>
             {" "}
             {placeholder}{" "}
           </span>
         )}
-        <div className="material-icons text-[20px] ml-auto">
+        <div className='material-icons text-[20px] ml-auto'>
           {!isOpen ? "expand_more" : "expand_less"}
         </div>
       </div>
       {isOpen && (
-        <ul className="dropdown-list">
+        <ul className='dropdown-list'>
           {options &&
-            options.map((option) => {
+            options.map(option => {
               return (
                 <li
-                  className="dropdown-list-item"
+                  className='dropdown-list-item'
                   onClick={() => onOptionClicked(option)}
                   key={Math.random()}
                 >
@@ -117,9 +117,9 @@ const CustomDropdown = ({
                     option
                   ) : (
                     <>
-                      <span className="w-[24px] h-[24px]">
+                      <span className='w-[24px] h-[24px]'>
                         <img
-                          className="dropdown-img h-full mx-auto block"
+                          className='dropdown-img h-full mx-auto block'
                           src={`/images/${option.value}.ico`}
                         />
                       </span>
