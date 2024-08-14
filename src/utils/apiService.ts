@@ -31,6 +31,29 @@ interface ApiErrorResponse {
 // Define service endpoints
 const ApiService = {
   // Example of GET request with error handling
+
+  getProductById: async (id: any): Promise<ApiResponse<Product> | ApiErrorResponse>=> {
+    try {
+      const response: AxiosResponse<ApiResponse<Product[]>> =
+        await axiosInstance.get("/products/" + id);
+
+      return { data: response.data, status: response.status }; // Include status code in successful response
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const serverError = error as AxiosError<ApiErrorResponse>;
+        if (serverError && serverError.response) {
+          // Return error message and status code from server response
+          return {
+            message: serverError.response.data.message || "An error occurred",
+            status: serverError.response.status,
+            data: serverError.response.data, // Optional: include additional data from the error response
+          };
+        }
+      }
+      // If error does not come from server or Axios
+      return { message: "An unexpected error occurred", status: 500 };
+    }
+  },
   getProducts: async (
     searchTerm: string,
     supermarket: string
